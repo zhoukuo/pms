@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>PMS-BJCA</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../../ionicons/css/ionicons.min.css">
+		<!-- bootstrap datepicker -->
+		<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<div class="wrapper">
+			<!-- Main Header -->
+			<header id="header" class="main-header">
+				<!-- Logo -->
+				<a href="#" class="logo">
+					<!-- mini logo for sidebar mini 50x50 pixels -->
+					<span class="logo-mini"><b>PMS</b></span>
+					<!-- logo for regular state and mobile devices -->
+					<span class="logo-lg">PMS-BJCA</span>
+				</a>
+				<!-- nav 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+				<nav id="nav" class="navbar navbar-static-top" role="navigation">&nbsp;</nav>
+			</header>
+			<!-- Left side column.不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<aside id="aside" class="main-sidebar">&nbsp;</aside>
+
+			<!-- Content Wrapper. Contains page content -->
+			<div id="pagebody" class="content-wrapper">
+				<!-- 以下为需要改动的内容  -->
+				<div id="SuccessMessage" class="alert alert-success alert-dismissible" style="display: none;">
+					<i class="icon fa fa-check"></i><span id="SuccussText">硬件借出更新成功！</span>
+				</div>
+				<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
+					<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
+				</div>
+				<!-- Content Header (Page header) -->
+				<section class="content-header">
+					<h1>更新硬件借出信息<small>Hardware Loan Update</small></h1>
+				</section>
+				<!-- Main content -->
+				<section class="content">
+					<div class="row">
+						<!-- left column -->
+						<!-- general form elements -->
+						<div class="box box-primary">
+							<div class="box-header with-border" style="display: none">
+								<h3 class="box-title">更新硬件借出信息</h3>
+							</div>
+							<!-- /.box-header -->
+							<!-- form start -->
+							<form role="form">
+								<div class="box-body" id="box-body">
+									<div class="form-group col-md-6">
+										<label for="id">序列号:*</label>
+										<input type="input" class="form-control" id="id" placeholder="请等待序列号加载" disabled="disabled">
+									</div>
+									<div class="form-group col-md-6">
+										<label>借出日期:*</label>
+										<input type="text" class="form-control pull-right" id="date" placeholder="请选择借出日期">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="platform">平台:*</label>
+										<input type="input" class="form-control" id="platform" placeholder="根据序列号自动生成" disabled="disabled">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="model">型号:*</label>
+										<input type="input" class="form-control" id="model" placeholder="根据序列号自动生成" disabled="disabled">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="project_id">项目编号:*</label>
+										<select class="form-control select2" id="project_id">
+											<option selected="selected">请选择项目编号...</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="user">领用人:*</label>
+										<input type="input" class="form-control" id="user" placeholder="请输入领用人姓名">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="delivery_type">交付方式:*</label>
+										<select class="form-control select2" id="delivery_type">
+											<option selected="selected">请选择交付方式 ...</option>
+											<option>快递</option>
+											<option>自提</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6" style="display:none;" id="number">
+										<label for="tracking_number">快递单号:</label>
+										<input type="input" class="form-control" id="tracking_number" placeholder="请输入快递单号">
+									</div>
+									<div class="form-group col-md-12" style="padding-right:0">
+										<label for="description">备注信息:</label>
+										<input type="input" class="form-control" id="description" placeholder="">
+									</div>
+								</div>
+								<!-- /.box-body -->
+
+								<div class="box-footer" style="margin-left:15px;">
+									<button id="commit" type="button" class="btn btn-primary">提  交</button>
+								</div>
+							</form>
+						</div>
+						<!-- /.box -->
+					</div>
+				</section>
+				<!-- /.content -->
+			</div>
+			<!-- /.content-wrapper -->
+
+			<!-- Main Footer 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<footer id="footer" class="main-footer">&nbsp;</footer>
+			<!-- /.control-sidebar -->
+			<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+			<div class="control-sidebar-bg"></div>
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- REQUIRED JS SCRIPTS -->
+
+		<!-- jQuery 2.2.3 -->
+		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../../bootstrap/js/bootstrap.min.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../../dist/js/app.min.js"></script>
+		<!-- bootstrap datepicker -->
+		<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+		<script src="../../plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+		<!-- setting -->
+		<script src="../../config.js"></script>
+		<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+
+		<script type="text/javascript">
+			var guid = window.location.search.replace("?", "");
+		
+			$(document).ready(function() {
+				InitDatePicker();
+				GetProjectIDList();
+				InitAllById();
+			});
+
+			//获取所有的项目编号
+			var GetProjectIDList = function() {
+				if(document.getElementById("project_id")) {
+					$.ajax({
+						url: "http://" + hostname + "/projects/",
+						type: 'GET',
+						dataType: "json",
+						data: "",
+						success: function(response) {
+							if(response.Status != 200) {
+								$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+								$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+								return;
+							}
+							$.each(JSON.parse(response.ResponseText), function(index, item) {
+								$("#project_id").append("<option>" + item.id + "</option>");
+							});
+						},
+						error: function(XmlHttpRequest, textStatus, errorThrown) {
+							//调用失败
+							$("#ErrorText").text("获取项目编号失败!");
+							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+						}
+					});
+				} else {
+					$("#ErrorText").text("页面加载失败!");
+					$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+				}
+			}
+
+			var InitAllById = function() {
+				$.ajax({
+					url: "http://" + hostname + "/loans/" + guid,
+					type: "GET",
+					dataType: "json",
+					data: "",
+					success: function(response) {
+						if(response.Status != 200) {
+							$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+							$("#platform").focus();
+							return;
+						}
+						var json = eval("(" + response.ResponseText + ")");
+						$('#box-body input').each(function() {
+							$(this).val(json[0][$(this).attr('id')]);
+						});
+						$('#box-body select').each(function() {
+							$(this).select().val(json[0][$(this).attr('id')]);
+							if($("#delivery_type").val() === "快递") {
+								$("#number").attr("style", "display:''");
+							}
+						});
+					},
+					error: function(XmlHttpRequest, textStatus, errorThrown) {
+						//调用失败
+						$("#ErrorText").text("获取硬件借出信息失败，请联系管理员！")
+						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+					}
+				});
+			}
+
+			//判断快递单号字段是否需要展示
+			$("#delivery_type").bind("change", "option", function() {
+				if($("#delivery_type").val() === "快递") {
+					$("#number").attr("style", "display:'';");
+				} else {
+					$("#number").attr("style", "display:none;");
+					$("#tracking_number").val("");
+				}
+			});
+
+			//格式化日历控件
+			var InitDatePicker = function() {
+				//初始化日历控件格式、属性
+				$('#date').datepicker({
+					autoclose: true,
+					format: 'yyyy-mm-dd',
+					language: 'zh-CN',
+					todayBtn: true,
+					todayHighlight: true,
+				});
+			}
+			//设置日历默认格式和值
+			var date = new Date().Format("yyyy-MM-dd");
+			//$("#date").val(date);
+
+			//判断必填项
+			var Validate = function() {
+				var valid = true;
+				if($("#id").val().indexOf("请") >= 0) {
+					$("#ErrorText").text("序列号不能为空！");
+					valid = false;
+				} else if($("#date").val() === "") {
+					$("#ErrorText").text("借出日期不能为空！");
+					valid = false;
+				} else if($("#platform").val() === "") {
+					$("#ErrorText").text("平台不能为空！平台根据序列号填写的值自动生成，请检查序列号！");
+					valid = false;
+				} else if($("#model").val() === "") {
+					$("#ErrorText").text("型号不能为空！型号根据序列号填写的值自动生成，请检查序列号！");
+					valid = false;
+				} else if($("#project_id").val() === "") {
+					$("#ErrorText").text("项目编号不能为空！");
+					$("#project_id").focus();
+					valid = false;
+				} else if($("#user").val() === "") {
+					$("#ErrorText").text("领用人不能为空！");
+					$("#user").focus();
+					valid = false;
+				} else if($("#delivery_type").val().indexOf("请") >= 0) {
+					$("#ErrorText").text("交付方式不能为空！");
+					valid = false;
+				} else if(($("#delivery_type").val() === "快递") &&
+					($("#tracking_number").val() === "")) {
+					$("#ErrorText").text("快递单号不能为空！");
+					valid = false;
+				}
+				return valid;
+			}
+
+			//点击提交按钮后业务处理
+			$("button#commit").click(function(event) {
+				//先判断是否有空字段
+				if(Validate() === false) {
+					$("#ErrorMessage").slideDown("500").delay("1000").slideUp("500");
+					return;
+				}
+				//全都填了之后，将所有字段内容转为json格式字符串
+				loanNewData = JSON.stringify({
+					"id": $.trim($("#id").val()),
+					"date": $.trim($("#date").val()),
+					"platform": $.trim($("#platform").val()),
+					"model": $.trim($("#model").val()),
+					"project_id": $.trim($("#project_id").val()),
+					"user": $.trim($("#user").val()),
+					"delivery_type": $.trim($("#delivery_type").val()),
+					"tracking_number": $.trim($("#tracking_number").val()),
+					"description": $.trim($("#description").val())
+				});
+
+				//发送请求调用接口
+				$.ajax({
+					url: "http://" + hostname + "/loans/" + guid,
+					type: "POST",
+					data: loanNewData,
+					success: function(response) {
+						// check status
+						if(response.Status != 200) {
+							$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+							$("#project_id").focus().select();
+							return;
+						}
+						//调用成功
+						$("#SuccussText").text("硬件借出信息更新成功，返回列表页面");
+						//返回上一页
+						$("#SuccessMessage").slideDown("500").delay("1000").slideUp("500");
+						setTimeout(function(){window.location.href="hardware_loan_list.html";},1000);
+					},
+					error: function(XmlHttpRequest, textStatus, errorThrown) {
+						//调用失败
+						$("#ErrorText").text("硬件借出信息更新失败，请联系管理员！");
+						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

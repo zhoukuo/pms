@@ -1,0 +1,2564 @@
+{
+	"variables": [],
+	"info": {
+		"name": "PMS",
+		"_postman_id": "309eb8bb-229a-12ad-6a4e-5502f8e9d163",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单元测试",
+			"description": "",
+			"item": [
+				{
+					"name": "服务可用验证",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}} Index",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"Welcome to PMS!\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": "验证服务是否可用"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "项目信息",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/projects/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-641\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"易鑫车贷网贷业务PDF电子签章应用项目\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"王燕\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"金融事业部\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"张三\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"项目信息测试数据\");",
+											"",
+											"var index = responseBody.indexOf(\"'\");",
+											"var guid = responseBody.substr(index+1, 32);",
+											"postman.setEnvironmentVariable(\"guid_project\", guid);",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/projects/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"BJCA2016-RZ-641\",\n\t\"name\":\"易鑫车贷网贷业务PDF电子签章应用项目\",\n\t\"manager\":\"王燕\",\n\t\"dept\":\"金融事业部\",\n\t\"customer\":\"张三\",\n\t\"description\":\"项目信息测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/projects/ exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"项目登记失败，编号已存在！\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/projects/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"BJCA2016-RZ-641\",\n\t\"name\":\"易鑫车贷网贷业务PDF电子签章应用项目\",\n\t\"manager\":\"王燕\",\n\t\"dept\":\"金融事业部\",\n\t\"customer\":\"张三\",\n\t\"description\":\"项目信息测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/projects/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-641\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"易鑫车贷网贷业务PDF电子签章应用项目\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"王燕\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"金融事业部\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"张三\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"项目信息测试数据\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/projects/{{guid_project}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/projects/ update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-641\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"张四\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"项目信息测试数据-更新\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"rowsAffected:1\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/projects/{{guid_project}}",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"BJCA2016-RZ-641\",\n\t\"name\":\"易鑫车贷网贷业务PDF电子签章应用项目\",\n\t\"manager\":\"王燕\",\n\t\"dept\":\"金融事业部\",\n\t\"customer\":\"张四\",\n\t\"description\":\"项目信息测试数据-更新\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/projects/ update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-641\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"张四\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"项目信息测试数据-更新\");",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/projects/{{guid_project}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "硬件信息",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/hardwares",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"2000V1.0型\");",
+											"",
+											"var index = responseBody.indexOf(\"'\");",
+											"var guid = responseBody.substr(index+1, 32);",
+											"postman.setEnvironmentVariable(\"guid_hardware\", guid);",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"北京三未信安科技有限公司\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"生产资料\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"台\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"13500\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"主机\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2014-01-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件信息测试数据\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardwares",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"platform\": \"2000V1.0型\",\n  \"supplier\":\"北京三未信安科技有限公司\",\n  \"type\":\"生产资料\",\n  \"unit\":\"台\",\n  \"price\":\"13500\",\n  \"class\":\"主机\",\n  \"publish_date\":\"2014-01-01\",\n  \"description\":\"硬件信息测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/hardwares exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件登记失败，平台已存在！\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardwares",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"platform\": \"2000V1.0型\",\n\t\"supplier\":\"北京三未信安科技有限公司\",\n\t\"type\":\"生产资料\",\n\t\"unit\":\"台\",\n\t\"price\":\"13500\",\n\t\"class\":\"主机\",\n\t\"publish_date\":\"2014-01-01\",\n\t\"description\":\"硬件信息测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/hardwares",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"2000V1.0型\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"北京三未信安科技有限公司\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"生产资料\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"台\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"13500\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"主机\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2014-01-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件信息测试数据\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardwares/{{guid_hardware}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/hardwares update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"2000V1.0型\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"14500\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2015-01-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件信息测试数据-更新\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"rowsAffected:1\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardwares/{{guid_hardware}}",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"platform\": \"2000V1.0型\",\n\t\"supplier\":\"北京三未信安科技有限公司\",\n\t\"type\":\"生产资料\",\n\t\"unit\":\"台\",\n\t\"price\":\"14500\",\n\t\"class\":\"主机\",\n\t\"publish_date\":\"2015-01-01\",\n\t\"description\":\"硬件信息测试数据-更新\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/hardwares update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"2000V1.0型\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"14500\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2015-01-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件信息测试数据-更新\");",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardwares/{{guid_hardware}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "软件信息",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/softwares/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"签名验签服务器\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"签名生产线\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"软件登记测试数据\");",
+											"",
+											"",
+											"var index = responseBody.indexOf(\"'\");",
+											"var guid = responseBody.substr(index+1, 32);",
+											"postman.setEnvironmentVariable(\"guid_software\", guid);",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softwares/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\":\"签名验签服务器\",\n\t\"model\":\"DSVS\",\n\t\"dept\":\"签名生产线\",\n\t\"description\":\"软件登记测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softwares/ exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"软件登记失败，型号已存在！\");",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softwares/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\":\"签名验签服务器\",\n\t\"model\":\"DSVS\",\n\t\"dept\":\"签名生产线\",\n\t\"description\":\"软件登记测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softwares/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"签名验签服务器\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"签名生产线\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"软件登记测试数据\");",
+											"",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softwares/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softwares/ update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"软件登记测试数据-更新\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"签名服务器\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"签名生产线\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"rowsAffected:1\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softwares/{{guid_software}}",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\":\"签名服务器\",\n\t\"model\":\"DSVS\",\n\t\"dept\":\"签名生产线\",\n\t\"description\":\"软件登记测试数据-更新\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softwares/ update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"软件登记测试数据-更新\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"签名服务器\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"签名生产线\");",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softwares/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "借用管理",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/hardstores",
+							"request": {
+								"url": "{{url}}/hardstores",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":          \"DS120G21610313\",\n\t\"order_id\":    \"BJCA201703010\",\n\t\"date\":        \"2017-03-20\",\n\t\"price\":       \"15000\",\n\t\"SAP\":         \"BJCA201702014\",\n\t\"receiving\":   \"4500000429\",\n\t\"description\": \"入库测试数据\",\n\t\"platform\":    \"2000V1.0型\",\n\t\"model\":       \"ESS-PDF\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/loans",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"111111111\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-07-15\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-640\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"zhangsi\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"自提\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件借出测试数据\");",
+											"",
+											"var index = responseBody.indexOf(\"'\");",
+											"var guid = responseBody.substr(index+1, 32);",
+											"postman.setEnvironmentVariable(\"guid_loan\", guid);",
+											"",
+											"",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/loans",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"DS120G21610313\",\n\t\"date\":\"2017-07-15\",\n\t\"project_id\":\"BJCA2016-RZ-640\",\n\t\"user\":\"zhangsi\",\n\t\"delivery_type\":\"自提\",\n\t\"tracking_number\":\"111111111\",\n\t\"description\":\"硬件借出测试数据\"\n}\n"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/loans 重复借出",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"更新状态失败，当前状态不允许更新!\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/loans",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"DS120G21610313\",\n\t\"date\":\"2017-07-15\",\n\t\"project_id\":\"BJCA2016-RZ-640\",\n\t\"user\":\"zhangsi\",\n\t\"delivery_type\":\"自提\",\n\t\"tracking_number\":\"111111111\",\n\t\"description\":\"硬件借出测试数据\"\n}\n"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/loans",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"111111111\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-07-15\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-640\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"zhangsi\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"自提\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件借出测试数据\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/loans/{{guid_loan}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events loan",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"借出\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"创建\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"111111111\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-07-15\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-640\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"zhangsi\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"自提\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件借出测试数据\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/loans update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"zhangwu\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"快递\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件借出测试数据-更新\");",
+											"",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-06-15\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-641\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2222222222\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"rowsAffected:1\");",
+											"",
+											"",
+											"",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/loans/{{guid_loan}}",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"DS120G21610313\",\n\t\"date\":\"2017-06-15\",\n\t\"project_id\":\"BJCA2016-RZ-641\",\n\t\"user\":\"zhangwu\",\n\t\"delivery_type\":\"快递\",\n\t\"tracking_number\":\"2222222222\",\n\t\"description\":\"硬件借出测试数据-更新\"\n}\n"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events loan update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"借出\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"修改\");",
+											"",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"zhangwu\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"快递\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件借出测试数据-更新\");",
+											"",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-06-15\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-641\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2222222222\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/returns/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件归还测试数据\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-07-20\");",
+											"",
+											"var index = responseBody.indexOf(\"'\");",
+											"var guid = responseBody.substr(index+1, 32);",
+											"postman.setEnvironmentVariable(\"guid_return\", guid);",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/returns/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"DS120G21610313\",\n\t\"date\":\"2017-07-20\",\n\t\"description\":\"硬件归还测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/returns/ 重复归还",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"更新状态失败，当前状态不允许更新!\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/returns/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"DS120G21610313\",\n\t\"date\":\"2017-07-20\",\n\t\"description\":\"硬件归还测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/returns",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件归还测试数据\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-07-20\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/returns/{{guid_return}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events return",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"归还\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"创建\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件归还测试数据\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-07-20\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/returns/ update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件归还测试数据-更新\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2018-07-20\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"rowsAffected:1\");",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/returns/{{guid_return}}",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"DS120G21610313\",\n\t\"date\":\"2018-07-20\",\n\t\"description\":\"硬件归还测试数据-更新\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events return update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"归还\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"修改\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件归还测试数据-更新\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2018-07-20\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "硬件入库管理",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/hardstores",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610888\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703009\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-03-20\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"15000\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201702014\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"4500000429\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"入库测试数据\");",
+											"",
+											"",
+											"var index = responseBody.indexOf(\"'\");",
+											"var guid = responseBody.substr(index+1, 32);",
+											"postman.setEnvironmentVariable(\"guid_hardstore\", guid);"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardstores",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":          \"DS120G21610888\",\n\t\"order_id\":    \"BJCA201703009\",\n\t\"date\":        \"2017-03-20\",\n\t\"price\":       \"15000\",\n\t\"SAP\":         \"BJCA201702014\",\n\t\"receiving\":   \"4500000429\",\n\t\"description\": \"入库测试数据\",\n\t\"platform\":    \"4000V1.0型\",\n\t\"model\":       \"DSVS\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/hardstores id exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件已存在！\");",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardstores",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":          \"DS120G21610888\",\n\t\"order_id\":    \"BJCA201703009\",\n\t\"date\":        \"2016-10-20\",\n\t\"price\":       \"15000\",\n\t\"SAP\":         \"BJCA201702014\",\n\t\"receiving\":   \"4500000429\",\n\t\"description\": \"入库测试数据\",\n\t\"platform\":    \"2000v1.0型\",\n\t\"model\":       \"ESS-PDF\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/hardstores",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610888\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703009\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-03-20\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"15000\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201702014\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"4500000429\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"入库测试数据\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardstores/{{guid_hardstore}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/stocks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610888\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-03-20\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"4000V1.0型\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/stocks/DS120G21610888",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events hardstore",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610888\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"入库\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"创建\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703009\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-03-20\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"15000\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201702014\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"4500000429\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"入库测试数据\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2000v1.0型\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/hardstores update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610888\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-03-21\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"rowsAffected:1\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardstores/{{guid_hardstore}}",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":          \"DS120G21610888\",\n\t\"order_id\":    \"BJCA201703009\",\n\t\"date\":        \"2017-03-21\",\n\t\"price\":       \"15000\",\n\t\"SAP\":         \"BJCA201702014\",\n\t\"receiving\":   \"4500000429\",\n\t\"description\": \"入库测试数据-更新\",\n\t\"platform\":    \"2000v1.0型\",\n\t\"model\":       \"ESS-PDF\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/stocks update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610888\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-03-21\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2000v1.0型\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"ESS-PDF\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/stocks/DS120G21610888",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events hardstore update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610888\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"入库\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"修改\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610888\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-03-21\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2000v1.0型\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"ESS-PDF\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/hardstores invalid",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"rowsAffected:1\");",
+											"",
+											"postman.clearEnvironmentVariable(\"guid_hardstore\");",
+											"",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardstores/{{guid_hardstore}}",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":          \"DS120G21610888\",\n\t\"status\":\t   \"作废\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events hardstore invalid",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"作废\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"创建\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/hardstore_orderlist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703010\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardstore_orderlist",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/hardstore_order_details/BJCA201703010",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610210\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703010\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"4500000429\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"ESS-PDF\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2000V1.0型\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"15000\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201702014\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardstore_order_details/BJCA201703010",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "硬件出库管理",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/hardstores",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/hardstores",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":          \"BJCA201703061\",\n\t\"order_id\":    \"BJCA201703009\",\n\t\"date\":        \"2016-10-20\",\n\t\"price\":       \"15000\",\n\t\"SAP\":         \"BJCA201702014\",\n\t\"receiving\":   \"4500000429\",\n\t\"description\": \"入库测试数据\",\n\t\"platform\":    \"2000V1.0型\",\n\t\"model\":       \"ESS-PDF\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/harddeliverys/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703061\");",
+											"",
+											"var index = responseBody.indexOf(\"'\");",
+											"var guid = responseBody.substr(index+1, 32);",
+											"postman.setEnvironmentVariable(\"guid_harddelivery\", guid);",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-641\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703009\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-02-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"13000\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1.5.2\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"RSA1024\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2019-02-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"zhangsan\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"快递\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1056914221422\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件出库测试数据\");",
+											"",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/harddeliverys/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"order_id\":\"BJCA201703009\",\n\t\"date\":\"2017-02-19\",\n\t\"id\":\"BJCA201703061\",\n\t\"price\":\"13000\",\n\t\"project_id\":\"BJCA2016-RZ-641\",\n\t\"soft_model\":\"DSVS\",\n\t\"version\":\"1.5.2\",\n\t\"algorithm\":\"RSA1024\",\n\t\"period\":\"2019-02-19\",\n\t\"user\":\"zhangsan\",\n\t\"delivery_type\":\"快递\",\n\t\"tracking_number\":\"1056914221422\",\n\t\"description\":\"硬件出库测试数据\",\n\t\"platform\":\"4000V1.0型\",\n\t\"model\":\"DSVS4000\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/harddeliverys/ 重复出库",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"更新状态失败，当前状态不允许更新!\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/harddeliverys/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"order_id\":\"BJCA201703061\",\n\t\"date\":\"2017-02-19\",\n\t\"id\":\"BJCA201703061\",\n\t\"price\":\"13000\",\n\t\"project_id\":\"BJCA2016-RZ-626\",\n\t\"soft_model\":\"DSVS\",\n\t\"version\":\"1.5.1\",\n\t\"algorithm\":\"RSA\",\n\t\"period\":\"2019-02-19\",\n\t\"user\":\"zhangsan\",\n\t\"delivery_type\":\"快递\",\n\t\"tracking_number\":\"1056914221422\",\n\t\"description\":\"硬件出库测试数据\",\n\t\"platform\":\"4000V1.0型\",\n\t\"model\":\"DSVS4000\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/harddeliverys/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703061\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-641\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703009\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-02-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"13000\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1.5.2\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"RSA1024\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2019-02-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"zhangsan\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"快递\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1056914221422\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件出库测试数据\");",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/harddeliverys/{{guid_harddelivery}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events harddelivery",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"出库\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"创建\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703061\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-641\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703009\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-02-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"13000\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1.5.2\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"RSA1024\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2019-02-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"zhangsan\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"快递\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1056914221422\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件出库测试数据\");",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/harddeliverys/ update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703015\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703061\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-03-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"18000\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-626\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"ESS-PDF\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1.5.1\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"RSA2048\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2019-03-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"zhangsi\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"自提\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件出库测试数据-更新\");",
+											"",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"rowsAffected:1\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/harddeliverys/{{guid_harddelivery}}",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"order_id\":\"BJCA201703015\",\n\t\"date\":\"2017-03-19\",\n\t\"id\":\"BJCA201703062\",\n\t\"price\":\"18000\",\n\t\"project_id\":\"BJCA2016-RZ-626\",\n\t\"soft_model\":\"ESS-PDF\",\n\t\"version\":\"1.5.1\",\n\t\"algorithm\":\"RSA2048\",\n\t\"period\":\"2019-03-19\",\n\t\"user\":\"zhangsi\",\n\t\"delivery_type\":\"自提\",\n\t\"tracking_number\":\"\",\n\t\"description\":\"硬件出库测试数据-更新\",\n\t\"platform\":\"2000V1.0型\",\n\t\"model\":\"DSVS2000\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events harddelivery update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610888\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"出库\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"修改\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703015\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703061\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-03-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"18000\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-626\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"ESS-PDF\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1.5.1\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"RSA2048\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2019-03-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"zhangsi\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"自提\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"硬件出库测试数据-更新\");",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/harddeliverysrejected/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703015\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"1056914221423\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"退货：\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/harddeliverysrejected/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"order_id\":\"BJCA201703015\",\n\t\"date\":\"2017-03-19\",\n\t\"id\":\"BJCA201703061\",\n\t\"price\":\"18000\",\n\t\"project_id\":\"BJCA2016-RZ-641\",\n\t\"soft_model\":\"DSVS\",\n\t\"version\":\"1.5.1\",\n\t\"algorithm\":\"RSA1024\",\n\t\"period\":\"2019-02-19\",\n\t\"user\":\"zhangsan\",\n\t\"delivery_type\":\"快递\",\n\t\"tracking_number\":\"1056914221423\",\n\t\"description\":\"硬件退货测试数据\",\n\t\"platform\":\"4000V1.0型\",\n\t\"model\":\"DSVS4000\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/harddeliverysrejected/ 重复退货",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"更新状态失败，当前状态不允许更新!\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/harddeliverysrejected/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"order_id\":\"BJCA201703061\",\n\t\"date\":\"2017-03-19\",\n\t\"id\":\"BJCA201703061\",\n\t\"price\":\"13000\",\n\t\"project_id\":\"BJCA2016-RZ-626\",\n\t\"soft_model\":\"DSVS\",\n\t\"version\":\"1.5.1\",\n\t\"algorithm\":\"RSA\",\n\t\"period\":\"2019-02-19\",\n\t\"user\":\"zhangsan\",\n\t\"delivery_type\":\"快递\",\n\t\"tracking_number\":\"1056914221423\",\n\t\"description\":\"硬件退货测试数据\",\n\t\"platform\":\"4000V1.0型\",\n\t\"model\":\"DSVS4000\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events harddelivery reject",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610888\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"退货\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"创建\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/harddelivery_order_list",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703015\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/harddelivery_order_list",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/harddelivery_order_details/BJCA201703010",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"-1\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-03-19\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703010\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA2016-RZ-626\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2000V1.0型\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"ESS-PDF\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"18000\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/harddelivery_order_details/BJCA201703015",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "软件入库管理",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/softstores/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1.5.0\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"10\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2015-01-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-05-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"产品\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"软件入库测试数据\");",
+											"",
+											"var index = responseBody.indexOf(\"'\");",
+											"var guid = responseBody.substr(index+1, 32);",
+											"postman.setEnvironmentVariable(\"guid_softstore\", guid);",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softstores/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"model\":\"DSVS\",\n\t\"version\":\"1.5.0\",\n\t\"count\":\"10\",\n\t\"publish_date\":\"2015-01-01\",\n\t\"store_date\":\"2017-05-01\",\n\t\"class\":\"产品\",\n\t\"description\":\"软件入库测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softstores/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softstores/{{guid_softstore}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softstores/ update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"ESS-PDF\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-06-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"软件入库测试数据-更新\");",
+											"",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1.5.1\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"10\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2015-01-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-06-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"产品\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"rowsAffected:1\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softstores/{{guid_softstore}}",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"model\":\"ESS-PDF\",\n\t\"version\":\"1.5.1\",\n\t\"count\":\"10\",\n\t\"publish_date\":\"2015-01-01\",\n\t\"store_date\":\"2017-06-01\",\n\t\"class\":\"产品\",\n\t\"description\":\"软件入库测试数据-更新\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softwares/ update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"ESS-PDF\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-06-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"软件入库测试数据-更新\");",
+											"",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1.5.1\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"10\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2015-01-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-06-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"产品\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softstores/{{guid_softstore}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softstores_version_list/DSVS",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var responseJson = JSON.parse(responseBody);",
+											"var returned = JSON.parse(responseJson.ResponseText);",
+											"tests[\"Your test name\"] = returned[0].version === \"1.5.1\";"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softstores_version_list/DSVS",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "软件出库管理",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/softdeliverys/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"1064781227223\");",
+											"",
+											"var index = responseBody.indexOf(\"'\");",
+											"var guid = responseBody.substr(index+1, 32);",
+											"postman.setEnvironmentVariable(\"guid_softdelivery\", guid);"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softdeliverys/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"date\":\"2016-10-01\",\n\t\"model\":\"DSVS\",\n\t\"count\":\"10\",\n\t\"version\":\"1.5.2\",\n\t\"project_id\":\"2018-10-01\",\n\t\"delivery_type\":\"快递\",\n\t\"tracking_number\":\"1064781227223\",\n\t\"description\":\"软件出库测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softdeliverys/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1064781227223\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softdeliverys/{{guid_softdelivery}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softdeliverys/ update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"tests[\"Body matches string\"] = responseBody.has(\"1064781227223\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-10-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"软件出库测试数据-更新\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"自提\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"rowsAffected:1\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softdeliverys/{{guid_softdelivery}}",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"\",\n\t\"date\":\"2017-10-01\",\n\t\"model\":\"DSVS\",\n\t\"count\":\"10\",\n\t\"version\":\"1.5.1\",\n\t\"project_id\":\"2018-10-01\",\n\t\"delivery_type\":\"自提\",\n\t\"tracking_id\":\"1064781227223\",\n\t\"description\":\"软件出库测试数据-更新\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/softdeliverys/ update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DSVS\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"1064781227223\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-10-01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"软件出库测试数据-更新\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"自提\");",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/softdeliverys/{{guid_softdelivery}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "库存管理",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/hardstores",
+							"request": {
+								"url": "{{url}}/hardstores",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":          \"DS120G21610210\",\n\t\"order_id\":    \"BJCA201703009\",\n\t\"date\":        \"2016-10-20\",\n\t\"price\":       \"15000\",\n\t\"SAP\":         \"BJCA201702014\",\n\t\"receiving\":   \"4500000429\",\n\t\"description\": \"入库测试数据\",\n\t\"platform\":    \"2000V1.0型\",\n\t\"model\":       \"ESS-PDF\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/stocks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610210\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"入库\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2016-10-20\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2000V1.0型\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"ESS-PDF\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/stocks/DS120G21610210",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": "获得所有硬件设备状态的列表，包含所有已出库、未出库、已借出、未借出等所有设备。"
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/stocks_useble/LOAN",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703061\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610210\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/stocks_useble/LOAN",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/stocks_useble/RETURN",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"[]\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/stocks_useble/RETURN",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/stocks_useble/DELIVERY",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"BJCA201703061\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610313\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21610210\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/stocks_useble/DELIVERY",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/stocks_useble/REJECT",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"[]\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/stocks_useble/REJECT",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/stocks_check/2017-03-20",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"var response = JSON.parse(jsonData.ResponseText);",
+											"",
+											"tests[\"count_currentmonth_delivery\"] = response[0].count_currentmonth_delivery === \"0\";",
+											"",
+											"tests[\"count_currentmonth_store\"] = response[0].count_currentmonth_store === \"1\";",
+											"",
+											"tests[\"count_lastmonth\"] = response[0].count_lastmonth === \"1\";",
+											"",
+											"var did = JSON.parse(response[0].delivery_order_id);",
+											"tests[\"delivery_order_id\"] = did[0].order_id === \"BJCA201703015\";",
+											"",
+											"var sid = JSON.parse(response[0].store_order_id);",
+											"tests[\"store_order_id\"] = sid[0].order_id === \"BJCA201703010\";",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/stocks_check/2017-03-20",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "动态",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/events/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21509414\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-01-01 12:01:01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"入库\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"新建\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"Admin\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"新建动态测试数据\");",
+											"",
+											"",
+											"var index = responseBody.indexOf(\"'\");",
+											"var guid = responseBody.substr(index+1, 32);",
+											"postman.setEnvironmentVariable(\"guid_event\", guid);",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\":\"DS120G21509414\",\n\t\"time\":\"2017-01-01 12:01:01\",\n\t\"business\":\"入库\",\n\t\"action\":\"新建\",\n\t\"operator\":\"Admin\",\n\t\"description\":\"新建动态测试数据\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/events/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"DS120G21509414\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"2017-01-01 12:01:01\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"入库\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"新建\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"Admin\");",
+											"",
+											"tests[\"Body matches string\"] = responseBody.has(\"新建动态测试数据\");",
+											"",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/events/{{guid_event}}",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "集成测试",
+			"description": "",
+			"item": []
+		}
+	]
+}

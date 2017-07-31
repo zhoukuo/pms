@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
+		<title>PMS-BJCA</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../../ionicons/css/ionicons.min.css">
+		<!-- bootstrap datepicker -->
+		<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<div class="wrapper">
+			<!-- Main Header -->
+			<header id="header" class="main-header">
+				<!-- Logo -->
+				<a href="#" class="logo">
+					<!-- mini logo for sidebar mini 50x50 pixels -->
+					<span class="logo-mini"><b>PMS</b></span>
+					<!-- logo for regular state and mobile devices -->
+					<span class="logo-lg">PMS-BJCA</span>
+				</a>
+				<!-- nav 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+				<nav id="nav" class="navbar navbar-static-top" role="navigation">&nbsp;</nav>
+			</header>
+			<!-- Left side column.不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<aside id="aside" class="main-sidebar">&nbsp;</aside>
+
+			<!-- Content Wrapper. Contains page content -->
+			<div id="pagebody" class="content-wrapper">
+				<div id="SuccessMessage" class="alert alert-success alert-dismissible" style="display: none;">
+					<i class="icon fa fa-check"></i><span id="SuccussText">软件入库成功！</span>
+				</div>
+				<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
+					<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
+				</div>
+				<!-- 以下为需要改动的内容  -->
+				<!-- Content Header (Page header) -->
+				<section class="content-header">
+					<h1>软件入库<small>Software Store New</small></h1>
+				</section>
+				<!-- Main content -->
+				<section class="content">
+					<div class="row">
+						<!-- left column -->
+						<!-- general form elements -->
+						<div class="box box-primary">
+							<div class="box-header with-border" style="display: none">
+								<h3 class="box-title">New Store</h3>
+							</div>
+							<!-- /.box-header -->
+							<!-- form start -->
+							<form role="form">
+								<div class="box-body">
+									<div class="form-group col-md-6">
+										<label for="store_order_id">软件型号:*</label>
+										<select class="form-control select2" id="model">
+											<option selected="selected">请选择软件型号 ...</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label>软件版本:*</label>
+										<input type="input" class="form-control" id="version" placeholder="请输入软件版本 ...">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="id">软件数量:</label>
+										<input type="input" class="form-control" id="count" placeholder="请输入软件数量 ...">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="hardware_id">发布日期:*</label>
+										<input type="text" class="form-control pull-right" id="publish_date" placeholder="请选择发布日期 ...">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="platform">入库日期:*</label>
+										<input type="text" class="form-control pull-right" id="store_date" placeholder="请选择入库日期 ...">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="price">类型:*</label>
+										<select class="form-control select2" id="class">
+											<option selected="selected">请选择类型 ...</option>
+											<option>产品</option>
+											<option>配套</option>
+										</select>
+									</div>
+
+									<div class="form-group col-md-12" style="padding-right:0">
+										<label for="description">备注信息:</label>
+										<input type="input" class="form-control" id="description" placeholder="">
+									</div>
+								</div>
+								<!-- /.box-body -->
+
+								<div class="box-footer" style="margin-left:15px;">
+									<button id="commit" type="button" class="btn btn-primary">提  交</button>
+								</div>
+							</form>
+						</div>
+						<!-- /.box -->
+					</div>
+				</section>
+				<!-- /.content -->
+			</div>
+			<!-- /.content-wrapper -->
+
+			<!-- Main Footer 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<footer id="footer" class="main-footer">&nbsp;</footer>
+			<!-- /.control-sidebar -->
+			<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+			<div class="control-sidebar-bg"></div>
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- REQUIRED JS SCRIPTS -->
+
+		<!-- jQuery 2.2.3 -->
+		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../../bootstrap/js/bootstrap.min.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../../dist/js/app.min.js"></script>
+		<!-- bootstrap datepicker -->
+		<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+
+		<script src="../../plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+		<script src="../../config.js"></script>
+		<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				InitDatePicker();
+				InitSoftModelList();
+				OnClickCommitButton();
+			});
+			var InitSoftModelList = function() {
+
+				$.ajax({
+					url: "http://" + hostname + "/softwares/",
+					type: "GET",
+					dataType: "json",
+					data: "",
+					success: function(response) {
+						$.each(JSON.parse(response.ResponseText), function(index, item) {
+							$("#model").append("<option>" + item.model + "</option> ");
+						});
+					},
+					error: function(XmlHttpRequest, textStatus, errorThrown) {
+						//调用失败
+						$("#ErrorText").text("获取软件型号列表失败，请联系管理员！");
+						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+					}
+				});
+
+			}
+			//initDataPicker
+			var InitDatePicker = function() {
+				$('#publish_date,#store_date').datepicker({
+					autoclose: true,
+					format: 'yyyy-mm-dd',
+					language: 'zh-CN',
+					todayBtn: true,
+					todayHighlight: true,
+				});
+			}
+
+			//set defaultDate
+			var date = new Date().Format("yyyy-MM-dd");
+			$("#publish_date,#store_date").val(date);
+
+			var vaildate = function() {
+				var valid = true;
+				if($("#model").val() === "请选择软件型号 ...") {
+					$("#ErrorText").text("软件型号不能为空！")
+					valid = false;
+				} else if($("#version").val() === "") {
+					$("#ErrorText").text("软件版本不能为空！")
+					valid = false;
+				} else if($("#publish_date").val() === "") {
+					$("#ErrorText").text("发布日期不能为空！")
+					valid = false;
+				} else if($("#store_date").val() === "") {
+					$("#ErrorText").text("入库日期不能为空！")
+					valid = false;
+				} else if($("#class").val() === "请选择类型 ...") {
+					$("#ErrorText").text("类型不能为空！")
+					valid = false;
+				}
+
+				return valid;
+			}
+
+			var OnClickCommitButton = function() {
+				$("button#commit").click(function() {
+					// check if NULL
+					if(vaildate() === false) {
+						$("#ErrorMessage").slideDown("500").delay("1000").slideUp("500");
+						return;
+					}
+					storeNewData = JSON.stringify({
+						"model": $.trim($("#model").val()),
+						"version": $.trim($("#version").val()),
+						"count": $.trim($("#count").val()),
+						"publish_date": $.trim($("#publish_date").val()),
+						"store_date": $.trim($("#store_date").val()),
+						"class": $.trim($("#class").val()),
+						"description": $.trim($("#description").val())
+					});
+					$.ajax({
+						url: "http://" + hostname + "/softstores/",
+						type: "POST",
+						data: storeNewData,
+						success: function(response) {
+							//check status
+							if(response.Status != 200) {
+								//失败
+								$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+								$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+								return;
+							}
+							//成功
+							$("#SuccessMessage").slideDown("500").delay("1000").slideUp("500");
+							// clean up
+							$("#model").val("请选择软件型号 ...").focus();
+							$("#version").val("");
+							$("#count").val("");
+							$("#class").val("请选择类型 ...");
+							$("#description").val("");
+						},
+						error: function(XmlHttpRequest, textStatus, errorThrown) {
+							//调用失败
+							$("#ErrorText").text("软件入库失败，请联系管理员！");
+							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+						}
+					});
+				});
+			}
+		</script>
+	</body>
+
+</html>

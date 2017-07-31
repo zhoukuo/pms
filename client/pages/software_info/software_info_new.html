@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
+		<title>PMS-BJCA</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../../ionicons/css/ionicons.min.css">
+		<!-- bootstrap datepicker -->
+		<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<div class="wrapper">
+			<!-- Main Header -->
+			<header id="header" class="main-header">
+				<!-- Logo -->
+				<a href="#" class="logo">
+					<!-- mini logo for sidebar mini 50x50 pixels -->
+					<span class="logo-mini"><b>PMS</b></span>
+					<!-- logo for regular state and mobile devices -->
+					<span class="logo-lg">PMS-BJCA</span>
+				</a>
+				<!-- nav 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+				<nav id="nav" class="navbar navbar-static-top" role="navigation">&nbsp;</nav>
+			</header>
+			<!-- Left side column.不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<aside id="aside" class="main-sidebar">&nbsp;</aside>
+
+			<!-- Content Wrapper. Contains page content -->
+			<div id="pagebody" class="content-wrapper">
+				<div id="SuccessMessage" class="alert alert-success alert-dismissible" style="display: none;">
+	                <i class="icon fa fa-check"></i><span id="SuccussText">软件登记成功！</span>
+              	</div>
+				<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
+					<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
+				</div>
+			<!-- 以下为需要改动的内容  -->
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>登记软件信息<small>Sofeware Info New</small></h1>
+			</section>
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<!-- left column -->
+					<!-- general form elements -->
+					<div class="box box-primary">
+						<div class="box-header with-border" style="display: none">
+							<h3 class="box-title">New Store</h3>
+						</div>
+						<!-- /.box-header -->
+						<!-- form start -->
+						<form role="form">
+							<div class="box-body">
+								<div class="form-group col-md-6">
+									<label for="store_order_id">软件名称:*</label>
+									<input type="input" class="form-control" id="name" placeholder="请输入软件名称 ...">
+								</div>
+								<div class="form-group col-md-6">
+									<label>软件型号:*</label>
+									<input type="input" class="form-control" id="model" placeholder="请输入软件型号 ...">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="id">所属部门:*</label>
+									<input type="input" class="form-control" id="dept" placeholder="请输入所属部门 ...">
+								</div>
+								<div class="form-group col-md-12" style="padding-right:0">
+									<label for="description">备注信息:</label>
+									<input type="input" class="form-control" id="description" placeholder="">
+								</div>
+							</div>
+							<!-- /.box-body -->
+
+							<div class="box-footer" style="margin-left:15px;">
+								<button id="commit" type="button" class="btn btn-primary">提  交</button>
+							</div>
+						</form>
+					</div>
+					<!-- /.box -->
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+			<!-- Main Footer 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+		<footer id="footer" class="main-footer">&nbsp;</footer>
+		<!-- /.control-sidebar -->
+		<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- REQUIRED JS SCRIPTS -->
+
+	<!-- jQuery 2.2.3 -->
+	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="../../bootstrap/js/bootstrap.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="../../dist/js/app.min.js"></script>
+	<!-- bootstrap datepicker -->
+	<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+
+	<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+
+	<script src="../../config.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+			onClickCommitButton();
+		});
+		var validate = function(){
+			var valid = true;
+			if ($("#name").val() === "") {
+				$("#ErrorText").text("软件名称不能为空！")
+				valid = false;
+			}
+			else if ($("#model").val() === "") {
+				$("#ErrorText").text("软件型号不能为空！")
+				valid = false;
+			}
+			else if ($("#dept").val() === "") {
+				$("#ErrorText").text("所属部门不能为空！")
+				valid = false;
+			}
+			
+			return valid;
+		}
+
+		var onClickCommitButton = function() {
+			$("button#commit").click( function() {
+				// check if NULL
+				
+				if (validate() === false) {
+					$("#ErrorMessage").slideDown("500").delay("1000").slideUp("500");
+					return;
+				}
+				
+				var storeNewData = JSON.stringify({
+		              "name": $.trim($("#name").val()),
+		              "model": $.trim($("#model").val()),
+		              "dept": $.trim($("#dept").val()),
+		              "description": $.trim($("#description").val())
+	        		});
+    			$.ajax({
+				  	url: "http://" + hostname + "/softwares/",
+				  	type: 'POST',
+				  	data: storeNewData,
+				  	success:function(response) {
+				  		// check status
+				  		if (response.Status != 200) {
+			    			//失败
+			  				$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+							return;
+	             		}
+
+				  		//成功
+						$("#SuccessMessage").slideDown("500").delay("1000").slideUp("500");
+						// clean up
+						$("#model").val("")
+						$("#dept").val("")
+						$("#name").val("").focus();
+				  
+				  	},
+				  	error: function(XmlHttpRequest, textStatus, errorThrown){
+						//调用失败
+						$("#ErrorText").text("登记软件信息失败，请联系管理员！")
+						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+				  	}
+				});
+			});
+		}
+	</script>
+	</body>
+</html>

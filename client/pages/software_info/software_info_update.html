@@ -1,0 +1,200 @@
+<!DOCTYPE html><html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>PMS-BJCA</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.6 -->
+	<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="../../ionicons/css/ionicons.min.css">
+	<!-- bootstrap datepicker -->
+	<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<!-- Main Header -->
+		<header id="header" class="main-header">
+			<!-- Logo -->
+			<a href="#" class="logo">
+				<!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini"><b>PMS</b></span>
+				<!-- logo for regular state and mobile devices -->
+				<span class="logo-lg">PMS-BJCA</span>
+			</a>
+			<!-- nav 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<nav id="nav" class="navbar navbar-static-top" role="navigation">&nbsp;</nav>
+		</header>
+		<!-- Left side column.不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+		<aside id="aside" class="main-sidebar">&nbsp;</aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div id="pagebody" class="content-wrapper">
+			<div id="SuccessMessage" class="alert alert-success alert-dismissible" style="display: none;">
+					<i class="icon fa fa-check"></i><span id="SuccussText">软件信息更新成功！</span>
+				</div>
+				<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
+					<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
+				</div>
+			<!-- 以下为需要改动的内容  -->
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>更新软件信息<small>Software Info Update</small></h1>
+			</section>
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<!-- left column -->
+					<!-- general form elements -->
+					<div class="box box-primary">
+						<div class="box-header with-border" style="display: none">
+							<h3 class="box-title">New Store</h3>
+						</div>
+						<!-- /.box-header -->
+						<!-- form start -->
+						<form role="form">
+							<div class="box-body" id="box-body">
+								<div class="form-group col-md-6">
+									<label for="name">软件名称：</label>
+									<input type="input" class="form-control" id="name" placeholder="请输入软件姓名">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="model">软件型号：</label>
+									<input type="input" class="form-control" id="model" placeholder="请输入软件型号" disabled="disabled">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="dept">所属部门：</label>
+									<input type="input" class="form-control" id="dept" placeholder="请输入所属部门">
+								</div>
+								<div class="form-group col-md-12" style="padding-right:0">
+									<label for="description">备注信息:</label>
+									<input type="input" class="form-control" id="description" placeholder="">
+								</div>
+							</div>
+							<!-- /.box-body -->
+
+							<div class="box-footer" style="margin-left:15px;">
+								<button type="button" id="commit" class="btn btn-primary">提  交</button>
+							</div>
+						</form>
+					</div>
+					<!-- /.box -->
+				</div>
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+			<!-- Main Footer 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+		<footer id="footer" class="main-footer">&nbsp;</footer>
+		<!-- /.control-sidebar -->
+		<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- REQUIRED JS SCRIPTS -->
+
+	<!-- jQuery 2.2.3 -->
+	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="../../bootstrap/js/bootstrap.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="../../dist/js/app.min.js"></script>
+	<!-- bootstrap datepicker -->
+	<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+	<script src="../../config.js"></script>
+	<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+
+	<script type="text/javascript">
+		var guid = window.location.search.replace("?", "");
+
+			$(document).ready(function() {
+				InitAllByID();
+			});
+				var InitAllByID = function() { //下拉列表联动
+				$.ajax({
+					url: "http://" + hostname + "/softwares/" + guid,
+					type: "GET",
+					dataType: "json",
+					data: "",
+					success: function(response) {
+						
+						var json = eval("(" + response.ResponseText + ")");
+						$('#box-body input').each(function() {
+							$(this).val(json[0][$(this).attr('id')]);
+						});
+					},
+					error: function(XmlHttpRequest, textStatus, errorThrown) {
+						//调用失败
+						$("#ErrorText").text("获取软件信息失败，请联系管理员！")
+						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+					}
+				});
+			}
+				$("button#commit").click(function(event) {
+				event.preventDefault(); //不进行页面刷新，不加会导致正确提示异常
+				var json = {};
+				var labelStr;
+				var isNull = false;
+				$('#box-body input,#box-body select').each(function() {
+					labelStr = $.trim($('label[for=' + $(this).attr('id') + ']').text()); //取关联的label内容
+					if(($.trim($(this).val()) === "" || $(this).val().indexOf("请") >= 0) && labelStr.indexOf("*") >= 0) {
+						$("#ErrorText").text(labelStr.replace(":*", "") + "不能为空！");
+						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+						$(this).focus();
+						isNull = true;
+						return false;
+					} //endif 判断必填项是否为空
+					json[$.trim($(this).attr('id'))] = $.trim($(this).val());
+				});
+
+				//jQuery无法使用return从each中退出函数，只能退出each循环，因此需要在each外部return
+				if(isNull === true) {
+					return false;
+				}
+
+				$.ajax({
+					url: "http://" + hostname + "/softwares/" + guid,
+					type: 'POST',
+					dataType: "json",
+					crossDomain: true,
+					data: JSON.stringify(json),
+					success: function(response) {
+						if(response.Status != 200) { //失败
+							$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+							return;
+						}
+
+						//成功
+						$("#SuccussText").text("软件信息更新成功，返回列表页面");
+						$("#SuccessMessage").slideDown("500").delay("1000").slideUp("500");
+						setTimeout(function(){window.location.href="software_info_list.html";},1000);
+					
+					},
+					error: function(XmlHttpRequest, textStatus, errorThrown) {
+						//调用失败
+						$("#ErrorText").text("更新软件信息失败，请联系管理员！")
+						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+					}
+				});
+			});
+	</script>
+</body>
+
+</html>

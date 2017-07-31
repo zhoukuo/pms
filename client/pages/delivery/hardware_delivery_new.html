@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
+		<title>PMS-BJCA</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../../ionicons/css/ionicons.min.css">
+		<!-- bootstrap datepicker -->
+		<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<div class="wrapper">
+			<!-- Main Header -->
+			<header id="header" class="main-header">
+				<!-- Logo -->
+				<a href="#" class="logo">
+					<!-- mini logo for sidebar mini 50x50 pixels -->
+					<span class="logo-mini"><b>PMS</b></span>
+					<!-- logo for regular state and mobile devices -->
+					<span class="logo-lg">PMS-BJCA</span>
+				</a>
+				<!-- nav 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+				<nav id="nav" class="navbar navbar-static-top" role="navigation">&nbsp;</nav>
+			</header>
+			<!-- Left side column.不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<aside id="aside" class="main-sidebar">&nbsp;</aside>
+
+			<!-- Content Wrapper. Contains page content -->
+			<div id="pagebody" class="content-wrapper">
+				<div id="SuccessMessage" class="alert alert-success alert-dismissible" style="display: none;">
+					<i class="icon fa fa-check"></i><span id="SuccussText">硬件出库成功！</span>
+				</div>
+				<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
+					<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
+				</div>
+				<!-- 以下为需要改动的内容  -->
+				<!-- Content Header (Page header) -->
+				<section class="content-header">
+					<h1>硬件出库<small>Hardware Delivery New</small></h1>
+				</section>
+				<!-- Main content -->
+				<section class="content">
+					<div class="row">
+						<!-- left column -->
+						<!-- general form elements -->
+						<div class="box box-primary">
+							<div class="box-header with-border" style="display: none">
+								<h3 class="box-title">New Store</h3>
+							</div>
+							<!-- /.box-header -->
+							<!-- form start -->
+							<form role="form">
+								<div class="box-body" id="box-body">
+									<div class="form-group col-md-6">
+										<label for="order_id">出库单号:*</label>
+										<input type="input" class="form-control" id="order_id" placeholder="请输入出库单号">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="date">出库日期:*</label>
+										<input type="text" class="form-control pull-right" id="date" placeholder="请选择日期">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="id">设备序列号:*</label>
+										<select class="form-control" id="id">
+											<option selected="selected">请选择设备序列号...</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="model">型号:</label>
+										<input type="input" class="form-control" id="model" disabled="disabled">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="platform">平台:</label>
+										<input type="input" class="form-control" id="platform" disabled="disabled">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="price">结算单价（元）:*</label>
+										<input type="input" class="form-control" id="price" placeholder="请输入单价">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="project_id">项目编号:*</label>
+										<select class="form-control" id="project_id">
+											<option selected="selected">请输入项目编号...</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="user">领用人:*</label>
+										<input type="input" class="form-control" id="user" placeholder="请输入领用人">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="soft_model">软件型号:*</label>
+										<select class="form-control" id="soft_model">
+											<option selected="selected">请选择软件型号...</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="version">软件版本:*</label>
+										<select class="form-control" id="version" disabled="disabled">
+											<option>请选择软件版本...</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="algorithm">算法:*</label>
+										<select class="form-control" id="algorithm">
+											<option selected="selected">请选择算法...</option>
+											<option>RSA1024</option>
+											<option>RSA2048</option>
+											<option>SM2</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="period">证书有效期:*</label>
+										<input type="text" class="form-control pull-right" id="period" placeholder="请选择日期">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="delivery_type">交付方式:*</label>
+										<select class="form-control" id="delivery_type">
+											<option selected="selected">请选择交付方式...</option>
+											<option>快递</option>
+											<option>自提</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="tracking_number">快递单号:</label>
+										<input type="input" class="form-control" id="tracking_number" placeholder="请输入快递单号" disabled="disabled">
+									</div>
+									<div class="form-group col-md-12">
+										<label for="description">备注信息:</label>
+										<input type="input" class="form-control" id="description" placeholder="">
+									</div>
+
+								</div>
+								<!-- /.box-body -->
+
+								<div class="box-footer" style="margin-left:15px;">
+									<button id="commit" type="button" class="btn btn-primary">提  交</button>
+								</div>
+							</form>
+						</div>
+						<!-- /.box -->
+					</div>
+				</section>
+				<!-- /.content -->
+			</div>
+			<!-- /.content-wrapper -->
+
+			<!-- Main Footer 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<footer id="footer" class="main-footer">&nbsp;</footer>
+			<!-- /.control-sidebar -->
+			<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+			<div class="control-sidebar-bg"></div>
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- REQUIRED JS SCRIPTS -->
+
+		<!-- jQuery 2.2.3 -->
+		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../../bootstrap/js/bootstrap.min.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../../dist/js/app.min.js"></script>
+		<!-- bootstrap datepicker -->
+		<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+		<script src="../../plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+		<!-- setting -->
+		<script src="../../config.js"></script>
+		<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				InitDatePicker();
+
+				//初始化项目id列表
+				GetList("/projects/", function(response) {
+					$.each(JSON.parse(response.ResponseText), function(index, item) {
+						$("#project_id").append("<option TITLE=" + item.name + ">" + item.id + "</option>");
+					});
+				}, "项目ID列表");
+
+				//初始化项目id列表
+				GetList("/stocks_useble/DELIVERY", function(response) {
+					$.each(JSON.parse(response.ResponseText), function(index, item) {
+						$("#id").append("<option TITLE=" + item.status + ">" + item.id + "</option>");
+					});
+				}, "设备序列号列表");
+
+				//初始化软件型号列表
+				GetList("/softwares/", function(response) {
+					$.each(JSON.parse(response.ResponseText), function(index, item) {
+						$("#soft_model").append("<option title=" + item.name + ">" + item.model + "</option>");
+					});
+				}, "软件型号列表");
+			});
+
+			var InitDatePicker = function() {
+				//Date picker
+				$("#date,#period").datepicker({
+					autoclose: true,
+					format: 'yyyy-mm-dd',
+					language: 'zh-CN',
+					todayBtn: true,
+					todayHighlight: true,
+				});
+				//set default date value
+				var dates = new Date().Format("yyyy-MM-dd");
+				$("#date,#period").val(dates);
+			}
+
+			$("#delivery_type").change(function() { //下拉列表联动，开关快递单号控件
+				if($(this).select().val().indexOf("快递") === -1) {
+					$("#tracking_number").attr("disabled", true);
+					$("#tracking_number").val("");
+					return;
+				}
+				$("#tracking_number").attr("disabled", false);
+			});
+
+			$("#id").change(function() { //下拉列表联动，获取model和platform
+				if($(this).select().val().indexOf("请") != -1) {
+					$("#model").val("");
+					$("#platform").val("");
+					return;
+				}
+
+				var hardwareID = $(this).select().val();
+				//初始化软件型号列表
+				GetList("/stocks/" + hardwareID, function(response) {
+					var json = JSON.parse(response.ResponseText)
+					$("#model").val(json.model);
+					$("#platform").val(json.platform);
+				}, "硬件平台和型号");
+			});
+
+			$("#soft_model").change(function() { //下拉列表联动，获取软件版本号
+				if($(this).select().val().indexOf("请") != -1) {
+					$("#version").attr("disabled", true);
+					$("#version option").remove();
+					$("#version").append("<option>请选择软件版本...</option>");
+					return;
+				}
+				var guid = $(this).select().val();
+				//版本列表
+				GetList("/softstores_version_list/" + guid, function(response) {
+					$("#version option").remove();
+					$("#version").append("<option>请选择软件版本...</option>");
+					$.each(JSON.parse(response.ResponseText), function(index, item) {
+						$("#version").append("<option>" + item.version + "</option>");
+					});
+					$("#version").attr("disabled", false);
+				}, "软件版本");
+			});
+
+			$("button#commit").click(function(event) {
+				event.preventDefault(); //不进行页面刷新，不加会导致正确提示异常
+				var json = {};
+				var labelStr;
+				var isNull = false;
+				$('#box-body input,#box-body select').each(function() {
+					labelStr = $.trim($('label[for=' + $(this).attr('id') + ']').text()); //取关联的label内容
+					if(($.trim($(this).val()) === "" || $(this).val().indexOf("请") >= 0) && labelStr.indexOf("*") >= 0) {
+						$("#ErrorText").text(labelStr.replace(":*", "") + "不能为空！");
+						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+						$(this).focus();
+						isNull = true;
+						return false;
+					} //endif 判断必填项是否为空
+
+					json[$.trim($(this).attr('id'))] = $.trim($(this).val());
+				});
+
+				//jQuery无法使用return从each中退出函数，只能退出each循环，因此需要在each外部return
+				if(isNull === true) {
+					return false;
+				}
+
+				PostCase("/harddeliverys/", JSON.stringify(json), function(response) {
+					$("#id option").remove();
+					$("#id").append("<option>请选择设备序列号...</option>");
+					//初始化项目id列表
+					GetList("/projects/", function(response) {
+						$.each(JSON.parse(response.ResponseText), function(index, item) {
+							$("#project_id").append("<option TITLE=" + item.name + ">" + item.id + "</option>");
+						});
+					}, "项目ID列表"); //成功之后，重新获取设备id
+				}, "硬件出库");
+			});
+		</script>
+	</body>
+
+</html>

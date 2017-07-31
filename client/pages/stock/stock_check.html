@@ -1,0 +1,226 @@
+<!DOCTYPE html><html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>PMS-BJCA</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.6 -->
+	<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="../../ionicons/css/ionicons.min.css">
+	<!-- bootstrap datepicker -->
+	<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+
+	<style type="text/css">
+		td{
+			vertical-align: middle;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<!-- Main Header -->
+		<header id="header" class="main-header">
+			<!-- Logo -->
+			<a href="#" class="logo">
+				<!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini"><b>PMS</b></span>
+				<!-- logo for regular state and mobile devices -->
+				<span class="logo-lg">PMS-BJCA</span>
+			</a>
+			<!-- nav 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<nav id="nav" class="navbar navbar-static-top" role="navigation">&nbsp;</nav>
+		</header>
+		<!-- center side column.不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+		<aside id="aside" class="main-sidebar">&nbsp;</aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div id="pagebody" class="content-wrapper">
+			<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
+				<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
+			</div>
+			<!-- 以下为需要改动的内容  -->
+			<!-- Main content -->
+			<section class="content-header">
+			<h1>库存盘点表<small>Stocks Check List</small><a id="print" class="btn btn-primary pull-right"><i class="fa fa-print"></i></a>
+				<div class="input-group date col-md-3 pull-right" style="margin-right: 10px;">
+					<div class="input-group-addon">
+						<b class="fa fa-calendar"></b>
+					</div>
+					<input type="text" class="form-control" id="datepicker" placeholder="请选择日期">
+				</div>
+			</h1>
+			</section>
+			<section class="content">
+				<div id="formOutterWrapper" class="row" style="background: white;">
+					<div class="box box-primary" id="formInnerWrapper">
+						<div class="box-body">
+							<table id="stockcheckTable" class="table table-hover table-bordered table-condensed">
+								<tr>
+									<td style="text-align: left;" colspan="7"><img src="../../dist/img/bjcaLogo.png" style="width:250px;height:30px;">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" >
+										<h3><b>BJCA产品库存盘点表</b></h3>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="7" >
+										<b>盘点日期：</b><span id="check_date"></span>
+									</td>
+								</tr>
+								<tr>
+									<td ><b>产品名称</b> </td>
+									<td ><b>上月转存</b> </td>
+									<td ><b>本月入库</b> </td>
+									<td ><b>入库单号</b> </td>
+									<td ><b>本月发出</b> </td>
+									<td ><b>出库单号</b> </td>
+									<td ><b>本月剩余</b> </td>
+								</tr>
+								<tbody id="stockcheckTableBody">
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+			</section>
+			<!-- /.content -->
+			</div>
+			<!-- /.content-wrapper -->
+
+			<!-- Main Footer 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<footer id="footer" class="main-footer">&nbsp;</footer>
+			<!-- /.control-sidebar -->
+			<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+			<div class="control-sidebar-bg"></div>
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- REQUIRED JS SCRIPTS -->
+
+		<!-- jQuery 2.2.3 -->
+		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../../bootstrap/js/bootstrap.min.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../../dist/js/app.min.js"></script>
+		<!-- bootstrap datepicker -->
+		<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+		<script src="../../plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+		<!-- setting -->
+		<script src="../../config.js"></script>
+
+		<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+
+		<script type="text/javascript">
+
+			$(document).ready(function() {
+				InitDatePicker();
+				$("#print").click(function(){
+					$("#formInnerWrapper").removeClass("box box-primary");
+					$("#footer").hide();
+					window.print();
+					location.reload();//刷新页面
+					//也可以不刷新页面,使用addClass和show,但是页面footer显示异常,页面底部会出现很大间距
+				});
+			});
+
+			var InitDatePicker = function() {
+				//Date picker
+				$('#datepicker').datepicker({
+					autoclose: true,
+					format: 'yyyy-mm-dd',
+					language: 'zh-CN',
+					todayBtn: true,
+					todayHighlight: true,
+				});
+
+				//set default date value
+				// var today = new Date().Format("yyyy-MM-dd");
+				// $("#datepicker").val(today);
+				// $("#check_date").text($("#datepicker").val());
+			}
+
+			$("#datepicker").change( function() {
+				//这里是datepicker的一个bug，每次日期更改会触发4次change事件，这里做一个处理
+				if( $("#check_date").text() === $("#datepicker").val()) {
+					return;
+				}
+
+				$("#check_date").text($("#datepicker").val());
+			    $("#stockcheckTableBody").text("");
+
+			    $.ajax({
+					url: "http://" + hostname + "/stocks_check/" + $("#datepicker").val(),
+				 	type: 'GET',
+				 	dataType: "json",
+				 	data: "",
+				  	success:function(response) {
+					    if (response.Status != 200) {
+					    	//失败
+					  		$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+						    return;
+						}
+
+						$.each(JSON.parse(response.ResponseText), function(index, item) {
+							var store_order_list="";
+							var delivery_order_list="";
+
+							$.each(JSON.parse(item.store_order_id), function(index, order) {
+								store_order_list = store_order_list + order.order_id + "<br>";
+							});
+
+							$.each(JSON.parse(item.delivery_order_id), function(index, order) {
+								delivery_order_list = delivery_order_list + order.order_id + "<br>";
+							});
+							//本月剩余=上月转存+本月入库-本月出库
+							var remaining = parseInt(item.count_lastmonth)+ parseInt(item.count_currentmonth_store)-parseInt(item.count_currentmonth_delivery);
+
+							$("#stockcheckTableBody").append("<tr>" + "<td>" + item.platform + "</td>" + "<td>" + item.count_lastmonth + "</td>" + "<td>"  + item.count_currentmonth_store + "</td>" + "<td>" + store_order_list + "</td>"+ "<td >" + item.count_currentmonth_delivery + "</td>"+ "<td>" + delivery_order_list + "</td>"+ "<td>" + remaining.toString() + "</td>");
+						});
+
+						$("#stockcheckTableBody").append("<tr> <td >&nbsp;</td> <td ></td> <td ></td> <td ></td> <td ></td> <td ></td> <td ></td> </tr> <tr> <td colspan='7'>&nbsp;</td> </tr>");
+						$("#stockcheckTableBody").append("<tr> <td colspan='1' > <b>盘点人:</b> </td> <td colspan='3' > <b>主管经理:</b> </td> <td colspan='3' > <b>财务接收人:</b> </td> </tr>");
+
+				  	},
+				  	error: function(XmlHttpRequest, textStatus, errorThrown){
+						//调用失败
+						$("#ErrorText").text("获取库存盘点信息失败，请联系管理员！");
+						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+				  	}
+				});
+
+
+			});
+
+			
+
+
+
+				
+		</script>
+</body>
+
+</html>

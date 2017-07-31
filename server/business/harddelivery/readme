@@ -1,0 +1,55 @@
+by zhengkeyan
+
+硬件产品出库 delivery/hardware_delivery_new.html
+更新硬件产品出库信息 delivery/hardware_delivery_update.html
+硬件产品退货 delivery/hardware_delivery_rejected.html
+更新硬件产品退货信息
+硬件产品出库列表 delivery/hardware_delivery_list.html
+生成出库单 delivery/hardware_delivery_order.html
+硬件产品出库后端接口
+
+order_id 单号
+date  出库日期
+id 设备序列号
+硬件型号
+平台
+price 单价
+project_id 项目编号
+user 领用人
+soft_model 软件型号
+version 软件版本
+algorithm 算法
+period 证书有效期
+delivery_type 交付方式
+tracking_number 快递单号
+description 备注
+
+
+order_id,
+date,
+id,
+price,
+project_id,
+soft_model,
+version,
+algorithm,
+period,
+user,
+delivery_type,
+tracking_number,
+description
+
+
+tbl_harddeliverys.order_id,
+tbl_harddeliverys.date,
+tbl_harddeliverys.id,
+tbl_harddeliverys.price,
+tbl_harddeliverys.project_id,
+tbl_harddeliverys.soft_model,
+tbl_harddeliverys.version,
+tbl_harddeliverys.algorithm,
+tbl_harddeliverys.period,
+tbl_harddeliverys.user,
+tbl_harddeliverys.delivery_type,
+tbl_harddeliverys.tracking_number,
+tbl_harddeliverys.description
