@@ -41,7 +41,7 @@
 			<!-- Content Wrapper. Contains page content -->
 			<div id="pagebody" class="content-wrapper">
 				<div id="SuccessMessage" class="alert alert-success alert-dismissible" style="display: none;">
-					<i class="icon fa fa-check"></i><span id="SuccussText">硬件出库成功！</span>
+					<i class="icon fa fa-check"></i><span id="SuccussText">硬件退货成功，返回列表页面！</span>
 				</div>
 				<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
 					<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
@@ -65,7 +65,7 @@
 							<form role="form">
 								<div class="box-body" id="box-body">
 									<div class="form-group col-md-6">
-										<label for="order_id">出库单号:*</label>
+										<label for="order_id">退货单号:*</label>
 										<input type="text" class="form-control pull-right" id="order_id">
 									</div>
 									<div class="form-group col-md-6">
@@ -74,9 +74,7 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="id">设备序列号:*</label>
-										<select class="form-control" id="id">
-											<option selected="selected">请选择设备序列号...</option>
-										</select>
+										<input type="text" class="form-control pull-right" id="id" disabled="disabled">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="model">型号:</label>
@@ -124,7 +122,7 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="tracking_number">快递单号:</label>
-										<input type="input" class="form-control" id="tracking_number" placeholder="请输入快递单号" disabled="disabled">
+										<input type="input" class="form-control" id="tracking_number" placeholder="请输入快递单号">
 									</div>
 									<div class="form-group col-md-12">
 										<label for="description">备注信息:</label>
@@ -159,6 +157,7 @@
 
 		<!-- jQuery 2.2.3 -->
 		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../../plugins/jquery-cookie-master/src/jquery.cookie.js"></script>
 		<!-- Bootstrap 3.3.6 -->
 		<script src="../../bootstrap/js/bootstrap.min.js"></script>
 		<!-- AdminLTE App -->
@@ -175,7 +174,7 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				InitDatePicker();
-				InitIdList();
+				InitAllByID();
 			});
 
 			var InitDatePicker = function() {
@@ -192,55 +191,24 @@
 				$("#date,#period").val(dates);
 			}
 
-			var InitIdList = function() { //初始化id列表
+			var guid = window.location.search.replace("?", "");
+			var InitAllByID = function() { //下拉列表联动
+				//取？号及后边的参数 以&分割多个参数
 				$.ajax({
-					url: "http://" + hostname + "/stocks_useble/REJECT",
-					type: "GET",
-					dataType: "json",
-					data: "",
-					success: function(response) {
-						if(response.Status != 200) {
-							//失败
-							$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
-							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
-							return;
-						}
-
-						$.each(JSON.parse(response.ResponseText), function(index, item) {
-							$("#id").append("<option>" + item.id + "</option>");
-						});
-					},
-					error: function(XmlHttpRequest, textStatus, errorThrown) {
-						//调用失败
-						$("#ErrorText").text("获取硬件序列号列表失败，请联系管理员！")
-						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
-					}
-				});
-			}
-
-			$("#id").change(function() { //下拉列表联动
-				if($(this).select().val().indexOf("请") != -1) {
-					$('#box-body input').each(function() {
-						if($(this).attr('id') != "id") {
-							$(this).val("");
-						}
-					});
-					return;
-				}
-
-				var id = $(this).select().val();
-				$.ajax({
-					url: "http://" + hostname + "/harddeliverys/" + id,
+					url: "http://" + hostname + "/harddeliverys/" + guid,
 					type: "GET",
 					dataType: "json",
 					data: "",
 					success: function(response) {
 						var json = eval("(" + response.ResponseText + ")");
 						$('#box-body input').each(function() {
-							if($(this).attr('id') != "id" && $(this).attr('id') != "delivery_type" && $(this).attr('id') != "tracking_number" && $(this).attr('id') != "description" && $(this).attr('id') != "date") {
-								$(this).val(json[0][$(this).attr('id')]);
-							}
+							$(this).val(json[0][$(this).attr('id')]);
 						});
+						$('#box-body select').each(function() {
+							//alert($(this).attr('id')+json[0][$(this).attr('id')]);
+							$(this).select().val(json[0][$(this).attr('id')]);
+						});
+						$("#order_id").val("");
 					},
 					error: function(XmlHttpRequest, textStatus, errorThrown) {
 						//调用失败
@@ -248,11 +216,12 @@
 						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
 					}
 				});
-			});
+			}
 
 			$("#delivery_type").change(function() { //下拉列表联动，开关快递单号控件
 				if($(this).select().val().indexOf("快递") === -1) {
 					$("#tracking_number").attr("disabled", true);
+					$("#tracking_number").val("");
 					return;
 				}
 				$("#tracking_number").attr("disabled", false);
@@ -272,7 +241,7 @@
 						isNull = true;
 						return false;
 					} //endif 判断必填项是否为空
-					
+
 					json[$.trim($(this).attr('id'))] = $.trim($(this).val());
 				});
 
@@ -292,12 +261,8 @@
 							return;
 						}
 						//成功
-						$("#SuccessMessage").slideDown("500").delay("2000").slideUp("500");
-						// clean up
-						$("#id option").remove();
-						$("#id").append("<option>请选择设备序列号...</option>");
-						InitIdList(); //成功之后，重新获取设备id
-						//$("#id").val("").focus();
+						$("#SuccessMessage").slideDown("500").delay("1000").slideUp("500");
+						setTimeout("window.location.href=document.referrer",2000)
 					},
 					error: function(XmlHttpRequest, textStatus, errorThrown) {
 						//调用失败

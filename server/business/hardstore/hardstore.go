@@ -166,7 +166,7 @@ func HardstoreUpdateByGUID(w http.ResponseWriter, r *http.Request, ps httprouter
 		log.Println("returned rowsAffected=", rowsAffected)
 
 		//
-		sqlStatement = fmt.Sprintf("DELETE FROM tbl_stocks WHERE guid='%s'", ps.ByName("guid"))
+		sqlStatement = fmt.Sprintf("DELETE FROM tbl_stocks WHERE id='%s'", (*rows)[0]["id"])
 		log.Println(sqlStatement)
 		rowsAffected, _ = gosql.Delete(config.DB, sqlStatement)
 		log.Println("returned rowsAffected=", rowsAffected)

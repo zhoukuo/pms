@@ -46,7 +46,7 @@
 				</div>
 				<!-- 以下为需要改动的内容  -->
 				<div id="SuccessMessage" class="alert alert-success alert-dismissible" style="display: none;">
-					<i class="icon fa fa-check"></i><span id="SuccussText">硬件信息更新成功！</span>
+					<i class="icon fa fa-check"></i><span id="SuccussText">硬件信息更新成功，返回列表页面！</span>
 				</div>
 				<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
 					<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
@@ -72,7 +72,7 @@
 										<label for="platform">平台:*</label>
 										<input type="input" class="form-control" id="platform" placeholder="平台名称自动获取" disabled="disabled">
 									</div>
-									<div class="form-group col-md-6" style="padding-right:0">
+									<div class="form-group col-md-6" >
 										<label for="supplier">供货商:*</label>
 										<input type="input" class="form-control" id="supplier" placeholder="请输入供货商名称">
 									</div>
@@ -80,7 +80,7 @@
 										<label for="type">科目:*</label>
 										<input type="input" class="form-control" id="type" placeholder="请输入科目名称">
 									</div>
-									<div class="form-group col-md-6" style="padding-right:0">
+									<div class="form-group col-md-6" >
 										<label for="unit">单位:*</label>
 										<select class="form-control" id="unit">
 											<option selected="selected">请选择单位...</option>
@@ -92,7 +92,7 @@
 										<label for="price">单价(仅用于成本核算):*</label>
 										<input type="input" class="form-control" id="price" placeholder="请输入单价">
 									</div>
-									<div class="form-group col-md-6" style="padding-right:0">
+									<div class="form-group col-md-6" >
 										<label>发布日期:*</label>
 										<input type="text" class="form-control pull-right" id="publish_date" placeholder="请选择日期">
 									</div>
@@ -104,7 +104,7 @@
 											<option>配件</option>
 										</select>
 									</div>
-									<div class="form-group col-md-12" style="padding-right:0">
+									<div class="form-group col-md-12" >
 										<label for="description">备注信息:</label>
 										<input type="input" class="form-control" id="description" placeholder="">
 									</div>
@@ -136,6 +136,7 @@
 
 		<!-- jQuery 2.2.3 -->
 		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../../plugins/jquery-cookie-master/src/jquery.cookie.js"></script>
 		<!-- Bootstrap 3.3.6 -->
 		<script src="../../bootstrap/js/bootstrap.min.js"></script>
 		<!-- AdminLTE App -->
@@ -268,10 +269,8 @@
 							return;
 						}
 						//调用成功
-						$("#SuccussText").text("硬件信息更新成功，返回列表页面");
-						//返回上一页
 						$("#SuccessMessage").slideDown("500").delay("1000").slideUp("500");
-						setTimeout(function(){window.location.href="hardware_info_list.html";},1000);
+						setTimeout("window.location.href=document.referrer",2000)
 					},
 					error: function(XmlHttpRequest, textStatus, errorThrown) {
 						//调用失败

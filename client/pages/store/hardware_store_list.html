@@ -60,6 +60,7 @@
 											<th>设备序列号</th>
 											<th>平台</th>
 											<th>型号</th>
+											<th>单价</th>
 											<th>入库单号</th>
 											<th>入库日期</th>
 											<th>备注信息</th>
@@ -67,7 +68,6 @@
 										</tr>
 									</thead>
 									<tbody>
-
 									</tbody>
 								</table>
 							</div>
@@ -97,6 +97,7 @@
 
 		<!-- jQuery 2.2.3 -->
 		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="../../plugins/jquery-cookie-master/src/jquery.cookie.js"></script>
 		<!-- Bootstrap 3.3.6 -->
 		<script src="../../bootstrap/js/bootstrap.min.js"></script>
 		<!-- AdminLTE App -->
@@ -127,26 +128,27 @@
 						$.each(JSON.parse(response.ResponseText), function(index, item) {
 							var editBtn = "";
 							if(item.status != "入库") {
-								editBtn = "<a class='btn btn-primary glyphicon glyphicon-edit'  disabled='disabled'></a>";
+								editBtn = "<a class='btn btn-primary'  disabled='disabled'>更新</a>";
 							} else {
-								editBtn = "<a href='hardware_store_update.html?" + item.guid + "' class='btn btn-primary glyphicon glyphicon-edit'></a>";
+								editBtn = "<a href='hardware_store_update.html?" + item.guid + "' class='btn btn-primary'>更新</a>";
 							}
 
 							$("#table").append(
-								"<tr>" + "<td>" + item.id +
-								"</td>" + "<td>" + item.platform +
-								"</td>" + "<td>" + item.model +
-								"</td>" + "<td>" + item.order_id +
-								"</td>" + "<td>" + item.date +
-								"</td>" + "<td>" + item.description +
-								"</td>" + "<td style='padding:0px;text-align: center;'><div class='btn-group'>" +
+								"<tr><td>" + item.id +
+								"</td><td>" + item.platform +
+								"</td><td>" + item.model +
+								"</td><td>" + item.price +
+								"</td><td>" + item.order_id +
+								"</td><td>" + item.date +
+								"</td><td>" + item.description +
+								"</td><td style='text-align: center;width:10%'>" + 
 								editBtn +
-								"</div></td>" + "</tr>"
+								"</td></tr>"
 							);
 						});
 						//这里一定要在数据加载后再初始化table控件和excel导出，否则数据无法排序，并且导出数据为空
 						$("#table").DataTable();
-						TableExport.init("硬件出库列表");
+						TableExport.init("硬件入库列表");
 					},
 					error: function(XmlHttpRequest, textStatus, errorThrown) {
 						//调用失败

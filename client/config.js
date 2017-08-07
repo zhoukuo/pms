@@ -1,4 +1,4 @@
-var hostname = "192.168.126.166:8088";
+var hostname = "127.0.0.1:8088";
 
 // 对Date的扩展，将 Date 转化为指定格式的String
 // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
@@ -38,12 +38,11 @@ var GetList = function(urlPare, callback, ErrorText) {
 		},
 		error: function(XmlHttpRequest, textStatus, errorThrown) {
 			//调用失败
-			$("#ErrorText").text("获取"+ErrorText+"信息失败，请联系管理员！")
+			$("#ErrorText").text("获取" + ErrorText + "信息失败，请联系管理员！")
 			$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
 		}
 	});
 }
-
 
 var PostCase = function(urlPare, jsonDate, callback, ErrorText) {
 	$.ajax({
@@ -62,8 +61,37 @@ var PostCase = function(urlPare, jsonDate, callback, ErrorText) {
 		},
 		error: function(XmlHttpRequest, textStatus, errorThrown) {
 			//调用失败
-			$("#ErrorText").text("提交"+ErrorText+"信息失败，请联系管理员！")
+			$("#ErrorText").text("提交" + ErrorText + "信息失败，请联系管理员！")
 			$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
 		}
 	});
+}
+
+var a = location.pathname;
+var b = a.split("/");
+var sleepFun = function() {
+	if($.cookie("status") != "ok") {
+		if(b[b.length - 1] != "login.html") {
+			document.location = "../../login.html"
+		}
+		return;
+	}
+	$("span[name='uname']").text($.cookie("username"))
+}
+
+//setTimeout("sleepFun()", 1000);
+//if($("span[name='uname']").length === 0) {
+//	setTimeout("sleepFun()", 1000);
+//	if($("span[name='uname']").length === 0) {
+//		setTimeout("sleepFun()", 2000);
+//	}
+//}
+
+//替换左侧、头部、底部html
+if(b[b.length - 1] != "index.html") {
+	$("#nav").load("../../pages/main/index.html #nav",function(){setTimeout("sleepFun()", 100)});
+	$("#aside").load("../../pages/main/index.html #aside",function(){setTimeout("sleepFun()", 100)});
+	$("#footer").load("../../pages/main/index.html #footer",function(){setTimeout("sleepFun()", 100)});
+}else{
+	setTimeout("sleepFun()", 100)
 }

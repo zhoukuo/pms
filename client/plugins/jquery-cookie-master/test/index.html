@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>PMS-BJCA</title>
+		<script src="../../jQuery/jquery-2.2.3.min.js"></script>
+		<script src="../src/jquery.cookie.js"></script>
+		<!--插件必须放在jquery下面-->
+		<script>
+			$(document).ready(function() {
+				$("#button").click(function() {
+					if($("#rember_me").attr("checked") == "checked") {
+						var username = $("#username").val();
+						var password = $("#password").val();
+						$.cookie("username", username, {
+							expires: 7
+						});
+						$.cookie("password", password, {
+							expires: 7
+						});
+					}
+				});
+
+				var username = $.cookie("username");
+				var password = $.cookie("password");
+				if(username && password) {
+					alert("you logged in.");
+				} else {
+					//alert("nonono");
+				}
+			});
+		</script>
+	</head>
+
+	<body>
+		<table border="1">
+			<tr>
+				<td>用户名：</td>
+				<td><input type="text" id="username" /></td>
+			</tr>
+			<tr>
+				<td>密码：</td>
+				<td><input type="password" id="password" /></td>
+			</tr>
+			<tr>
+				<td><input type="button" id="button" value="登陆" /></td>
+				<td><input type="checkbox" id="rember_me" />记住我</td>
+			</tr>
+		</table>
+	</body>
+
+</html>

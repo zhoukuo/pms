@@ -1,61 +1,62 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
-	<title>PMS-BJCA</title>
-	<!-- Tell the browser to be responsive to screen width -->
-	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<!-- Bootstrap 3.3.6 -->
-	<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
-	<!-- Ionicons -->
-	<link rel="stylesheet" href="../../ionicons/css/ionicons.min.css">
-	<!-- bootstrap datepicker -->
-	<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
-	<!-- Theme style -->
-	<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
-	<!-- AdminLTE Skins. Choose a skin from the css/skins
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
+		<title>PMS-BJCA</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../../ionicons/css/ionicons.min.css">
+		<!-- bootstrap datepicker -->
+		<link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-	<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+		<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
 
-	<style type="text/css">
-		td{
-			vertical-align: middle;
-			text-align: center;
-		}
-	</style>
+		<style type="text/css">
+			td {
+				vertical-align: middle;
+				text-align: center;
+			}
+		</style>
 
-</head>
+	</head>
 
-<body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
-		<!-- Main Header -->
-		<header id="header" class="main-header">
-			<!-- Logo -->
-			<a href="#" class="logo">
-				<!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>PMS</b></span>
-				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg">PMS-BJCA</span>
-			</a>
-			<!-- nav 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
-			<nav id="nav" class="navbar navbar-static-top" role="navigation">&nbsp;</nav>
-		</header>
-		<!-- Left side column.不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
-		<aside id="aside" class="main-sidebar">&nbsp;</aside>
+	<body class="hold-transition skin-blue sidebar-mini">
+		<div class="wrapper">
+			<!-- Main Header -->
+			<header id="header" class="main-header">
+				<!-- Logo -->
+				<a href="#" class="logo">
+					<!-- mini logo for sidebar mini 50x50 pixels -->
+					<span class="logo-mini"><b>PMS</b></span>
+					<!-- logo for regular state and mobile devices -->
+					<span class="logo-lg">PMS-BJCA</span>
+				</a>
+				<!-- nav 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+				<nav id="nav" class="navbar navbar-static-top" role="navigation">&nbsp;</nav>
+			</header>
+			<!-- Left side column.不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<aside id="aside" class="main-sidebar">&nbsp;</aside>
 
-		<!-- Content Wrapper. Contains page content -->
-		<div id="pagebody" class="content-wrapper">
-			<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
-				<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
-			</div>
+			<!-- Content Wrapper. Contains page content -->
+			<div id="pagebody" class="content-wrapper">
+				<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
+					<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
+				</div>
 
-			<!-- 以下为需要改动的内容  -->
-			<!-- Main content -->
-			<section class="content-header">
-				<h1>生成入库单<small>Hardware Store Order</small>
+				<!-- 以下为需要改动的内容  -->
+				<!-- Main content -->
+				<section class="content-header">
+					<h1>生成入库单<small>Hardware Store Order</small>
 					<a id="print" class="btn btn-primary pull-right"><i class="fa fa-print"></i></a>
 					<div class="pull-right" style="margin-right: 10px;">
 						<select id="order_list" class="form-control select2" style="padding:0px;">
@@ -63,149 +64,152 @@
 						</select>
 					</div>
 				</h1>
-			</section>
-			<section class="content">
-				<div id="formOutterWrapper" class="row" style="background: white;">
-					<div class="box box-primary" id="formInnerWrapper">
-						<div class="box-body">
-						<table id="storeorderTable" class="table table-hover table-bordered table-condensed"  style="background:;">
-							<tr>
-								<td style="text-align: left;" colspan="7"><img src="../../dist/img/bjcaLogo.png" style="width:250px;height:30px;">
-								</td>
-							</tr>
-							<tr>
-								<td colspan="7" > <h3><b>物料入库单</b></h3></td>
-							</tr>
-							<tr>
-								<td colspan="1" style="text-align: left" ><b>科目：</b><span id="type"></span></td>
-								<td colspan="3" style="text-align: left"><b>日期：</b><span id="date"></span></td>
-								<td colspan="2" style="text-align: left"><b>供货商：</b><span id="supplier"></span></td>
-								<td style="text-align: left"><b>入库单号：</b><span id="order_id"></span></td>
-							</tr>
-							<tr>
-								<td ><b>平台</b></td>
-								<td ><b>单位</b></td>
-								<td ><b>数量</b></td>
-								<td ><b>单价</b></td>
-								<td ><b>金额(元)</b></td>
-								<td ><b>SAP号</b></td>
-								<td ><b>到货验收单号</b></td>
-							</tr>
-							<tbody id="storeorderTableBody">
-							</tbody>
-						</table>
-					</div></div>
-			</section>
-			<!-- /.content -->
-			</div>
-			<!-- /.content-wrapper -->
+				</section>
+				<section class="content">
+					<div id="formOutterWrapper" class="row" style="background: white;">
+						<div class="box box-primary" id="formInnerWrapper">
+							<div class="box-body">
+								<table id="storeorderTable" class="table table-hover table-bordered table-condensed" style="background:;">
+									<tr>
+										<td style="text-align: left;" colspan="7"><img src="../../dist/img/bjcaLogo.png" style="width:250px;height:30px;">
+										</td>
+									</tr>
+									<tr>
+										<td colspan="7">
+											<h3><b>物料入库单</b></h3></td>
+									</tr>
+									<tr>
+										<td colspan="1" style="text-align: left"><b>科目：</b><span id="type"></span></td>
+										<td colspan="3" style="text-align: left"><b>日期：</b><span id="date"></span></td>
+										<td colspan="2" style="text-align: left"><b>供货商：</b><span id="supplier"></span></td>
+										<td style="text-align: left"><b>入库单号：</b><span id="order_id"></span></td>
+									</tr>
+									<tr>
+										<td><b>平台</b></td>
+										<td><b>单位</b></td>
+										<td><b>数量</b></td>
+										<td><b>单价</b></td>
+										<td><b>金额(元)</b></td>
+										<td><b>SAP号</b></td>
+										<td><b>到货验收单号</b></td>
+									</tr>
+									<tbody id="storeorderTableBody">
+									</tbody>
+								</table>
+							</div>
+						</div>
+				</section>
+				<!-- /.content -->
+				</div>
+				<!-- /.content-wrapper -->
 
 				<!-- Main Footer 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
-			<footer id="footer" class="main-footer">&nbsp;</footer>
-			<!-- /.control-sidebar -->
-			<!-- Add the sidebar's background. This div must be placed
+				<footer id="footer" class="main-footer">&nbsp;</footer>
+				<!-- /.control-sidebar -->
+				<!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-			<div class="control-sidebar-bg"></div>
-		</div>
-		<!-- ./wrapper -->
+				<div class="control-sidebar-bg"></div>
+			</div>
+			<!-- ./wrapper -->
 
-		<!-- REQUIRED JS SCRIPTS -->
+			<!-- REQUIRED JS SCRIPTS -->
 
-		<!-- jQuery 2.2.3 -->
-		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-		<!-- Bootstrap 3.3.6 -->
-		<script src="../../bootstrap/js/bootstrap.min.js"></script>
-		<!-- AdminLTE App -->
-		<script src="../../dist/js/app.min.js"></script>
-		<!-- bootstrap datepicker -->
-		<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
-		<!-- setting -->
-		<script src="../../config.js"></script>
-		<!-- Optionally, you can add Slimscroll and FastClick plugins.
+			<!-- jQuery 2.2.3 -->
+			<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+			<script src="../../plugins/jquery-cookie-master/src/jquery.cookie.js"></script>
+			<!-- Bootstrap 3.3.6 -->
+			<script src="../../bootstrap/js/bootstrap.min.js"></script>
+			<!-- AdminLTE App -->
+			<script src="../../dist/js/app.min.js"></script>
+			<!-- bootstrap datepicker -->
+			<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+			<!-- setting -->
+			<script src="../../config.js"></script>
+			<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
 
-		<script type="text/javascript">
-
-			$(document).ready(function() {
-				InitOrderList();
-				$("#print").click(function(){
-					$("#formInnerWrapper").removeClass("box box-primary");
-					$("#footer").hide();
-					window.print();
-					location.reload();//刷新页面
-					//也可以不刷新页面,使用addClass和show,但是页面footer显示异常,页面底部会出现很大间距
+			<script type="text/javascript">
+				$(document).ready(function() {
+					InitOrderList();
+					$("#print").click(function() {
+						$("#formInnerWrapper").removeClass("box box-primary");
+						$("#footer").hide();
+						window.print();
+						location.reload(); //刷新页面
+						//也可以不刷新页面,使用addClass和show,但是页面footer显示异常,页面底部会出现很大间距
+					});
 				});
-			});
 
-			var InitOrderList = function() {
-				$.ajax({
-					url: "http://" + hostname + "/hardstore_orderlist/",
-				 	type: 'GET',
-				 	dataType: "json",
-				 	data: "",
-				  	success:function(response) {
-					    if (response.Status != 200) {
-					    	//失败
-					  		$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+				var InitOrderList = function() {
+					$.ajax({
+						url: "http://" + hostname + "/hardstore_orderlist/",
+						type: 'GET',
+						dataType: "json",
+						data: "",
+						success: function(response) {
+							if(response.Status != 200) {
+								//失败
+								$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+								$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+								return;
+							}
+
+							$.each(JSON.parse(response.ResponseText), function(index, item) {
+								$("#order_list").append("<option value=" + item.order_id + ">" + item.order_id + "</option>");
+							});
+						},
+						error: function(XmlHttpRequest, textStatus, errorThrown) {
+							//调用失败
+							$("#ErrorText").text("获取入库单列表失败，请联系管理员！");
 							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
-						    return;
 						}
-				
-						$.each(JSON.parse(response.ResponseText), function(index, item) {
-							$("#order_list").append("<option value=" + item.order_id +">" + item.order_id + "</option>");
-						});
-				  	},
-				  	error: function(XmlHttpRequest, textStatus, errorThrown){
-						//调用失败
-						$("#ErrorText").text("获取入库单列表失败，请联系管理员！");
-						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
-				  	}
-				});
-			}
+					});
+				}
 
-			$("#order_list").bind("click", function() {
-				$.ajax({
-					url: "http://" + hostname + "/hardstore_order_details/" + $('#order_list').val(),
-				 	type: 'GET',
-				 	dataType: "json",
-				 	data: "",
-				  	success:function(response) {
-					    if (response.Status != 200) {
-					    	//失败
-					  		$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+				$("#order_list").bind("click", function() {
+					$.ajax({
+						url: "http://" + hostname + "/hardstore_order_details/" + $('#order_list').val(),
+						type: 'GET',
+						dataType: "json",
+						data: "",
+						success: function(response) {
+							if(response.Status != 200) {
+								//失败
+								$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
+								$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+								return;
+							}
+
+							$("#storeorderTableBody").text("");
+							$("#order_id").text("");
+							$("#type").text("");
+							$("#date").text("");
+							$("#supplier").text("");
+
+							var item = JSON.parse(response.ResponseText)[0];
+							$("#order_id").text(item.order_id);
+							$("#type").text(item.type);
+							$("#date").text(item.date);
+							$("#supplier").text(item.supplier);
+
+							$.each(JSON.parse(response.ResponseText), function(index, item) {
+								$("#storeorderTableBody").append("<tr>" + "<td>" + item.platform + "</td>" + "<td>" + item.unit + "</td>" + "<td>" + item.count + "</td>" + "<td>" + item.price + "</td>" + "<td>" + parseFloat(item.price) * parseInt(item.count) + "</td>" + "<td>" + item.sap + "</td>" + "<td>" + item.receiving + "</td>");
+							});
+							for(var i = 0; i < 3; i++) {
+								$("#storeorderTableBody").append("<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+							}
+							$("#storeorderTableBody").append("<tr><td ><b>备注：</b></td><td colspan='6'></td></tr><tr><td colspan='1' ><b>保管员：</b></td><td colspan='3'>&nbsp;</td><td colspan='1' ><b>主管经理：</b></td>colspan='2'>&nbsp;</td><td></td><td></td></tr>")
+						},
+						error: function(XmlHttpRequest, textStatus, errorThrown) {
+							//调用失败
+							$("#ErrorText").text("获取入库单信息失败，请联系管理员！");
 							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
-						    return;
 						}
-
-						$("#storeorderTableBody").text("");
-						$("#order_id").text("");
-						$("#type").text("");
-						$("#date").text("");
-						$("#supplier").text("");	
-
-						var item = JSON.parse(response.ResponseText)[0];
-						$("#order_id").text(item.order_id);
-						$("#type").text(item.type);
-						$("#date").text(item.date);
-						$("#supplier").text(item.supplier);
-
-						$.each(JSON.parse(response.ResponseText), function(index, item) {
-							$("#storeorderTableBody").append("<tr>" + "<td>" + item.platform + "</td>" + "<td>" + item.unit + "</td>" + "<td>" + item.count + "</td>" + "<td>" + item.price + "</td>" + "<td>" + parseFloat(item.price)*parseInt(item.count) + "</td>" + "<td>" + item.sap + "</td>"+ "<td>" + item.receiving + "</td>");
-						});
-						for(var i=0; i<3; i++){
-							$("#storeorderTableBody").append("<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
-						}
-						$("#storeorderTableBody").append("<tr><td ><b>备注：</b></td><td colspan='6'></td></tr><tr><td colspan='1' ><b>保管员：</b></td><td colspan='3'>&nbsp;</td><td colspan='1' ><b>主管经理：</b></td>colspan='2'>&nbsp;</td><td></td><td></td></tr>")
-				  	},
-				  	error: function(XmlHttpRequest, textStatus, errorThrown){
-						//调用失败
-						$("#ErrorText").text("获取入库单信息失败，请联系管理员！");
-						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
-				  	}
+					});
 				});
-			});
-		</script>
-</body>
+			</script>
+	</body>
+
 </html>

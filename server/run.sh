@@ -42,7 +42,7 @@ mv pms.db $db
 echo $timestamp 'Start Server ...'
 cd $GOPATH/bin
 mv main pms
-nohup ./pms &
+nohup ./pms 2>&1 >> pms.log &
 
 echo -e "=======================================================================================\n"
 echo $timestamp "Running Static Code Analysis ..."
@@ -60,3 +60,5 @@ newman -c cases.json -e env.json -H HTML
 
 
 echo -e "=======================================================================================\n"
+
+exit

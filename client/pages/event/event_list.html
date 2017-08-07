@@ -94,6 +94,7 @@
 
 	<!-- jQuery 2.2.3 -->
 	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../../plugins/jquery-cookie-master/src/jquery.cookie.js"></script>
 	<!-- Bootstrap 3.3.6 -->
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- AdminLTE App -->
@@ -123,7 +124,15 @@
 					}
 
 					$.each(JSON.parse(response.ResponseText), function(index, item) {
-				    	$("#table").append("<tr>" + "<td>" + item.id + "</td>" + "<td>" + item.time + "</td>" + "<td>" + item.business + "</td>" + "<td>" + item.action + "</td>" + "<td>" + item.operator  + "</td>"+ "<td>" + item.description + "</td>" + "</tr>");
+				    	$("#table").append(
+				    		"<tr><td>" + item.id + 
+				    		"</td><td>" + item.time + 
+				    		"</td><td>" + item.business + 
+				    		"</td><td>" + item.action + 
+				    		"</td><td>" + item.operator  + 
+				    		"</td><td>" + item.description + 
+				    		"</td></tr>"
+				    	);
 					});
 
 					$("#table").DataTable();

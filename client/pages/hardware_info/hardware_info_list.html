@@ -99,6 +99,7 @@
 
 	<!-- jQuery 2.2.3 -->
 	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../../plugins/jquery-cookie-master/src/jquery.cookie.js"></script>
 	<!-- Bootstrap 3.3.6 -->
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- AdminLTE App -->
@@ -126,7 +127,19 @@
 		  		}
 				//调用成功
 				$.each(JSON.parse(response.ResponseText), function(index, item) {
-					$("#table").append("<tr>" + "<td>" + item.platform + "</td>" + "<td>" + item.supplier + "</td>" + "<td>" + item.type + "</td>" + "<td>" + item.unit + "</td>" + "<td>" + item.price + "</td>" + "<td>" + item.class + "</td>"  + "<td>" + item.publish_date + "</td>" + "<td>" + item.description + "</td>" + "<td style='padding:0px;text-align: center;'><div class='btn-group'><a href='hardware_info_update.html?"+item.guid+"' class='btn btn-primary glyphicon glyphicon-edit'></a></div></td>" + "</tr>");
+					$("#table").append(
+						"<tr><td>" + item.platform + 
+						"</td><td>" + item.supplier + 
+						"</td><td>" + item.type + 
+						"</td><td>" + item.unit + 
+						"</td><td>" + item.price + 
+						"</td><td>" + item.class + 
+						"</td><td>" + item.publish_date + 
+						"</td><td>" + item.description + 
+						"</td><td style='text-align: center;width:10%'>" + 
+						"<a href='hardware_info_update.html?"+item.guid+"' class='btn btn-primary'>更新</a>"+
+						"</td></tr>"
+					);
 				});
 
 				$("#table").DataTable();

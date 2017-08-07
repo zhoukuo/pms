@@ -100,6 +100,7 @@
 
 	<!-- jQuery 2.2.3 -->
 	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../../plugins/jquery-cookie-master/src/jquery.cookie.js"></script>
 	<!-- Bootstrap 3.3.6 -->
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- AdminLTE App -->
@@ -129,7 +130,20 @@
 		  		}
 				//调用成功
 				$.each(JSON.parse(response.ResponseText), function(index, item) {
-					$("#table").append("<tr>" + "<td>" + item.id + "</td>" + "<td>" + item.platform + "</td>" + "<td>" + item.model + "</td>" + "<td>" + item.project_id + "</td>" + "<td>" + item.user + "</td>" + "<td>" + item.delivery_type + "</td>" + "<td>" + item.tracking_number + "</td>" + "<td>" + item.date + "</td>" + "<td>" + item.description + "</td>" + "<td style='padding:0px;text-align: center;'><div class='btn-group'><a href='hardware_loan_update.html?"+item.guid+"' class='btn btn-primary glyphicon glyphicon-edit'></a></div></td>" + "</tr>");
+					$("#table").append(
+						"<tr><td>" + item.id + 
+						"</td><td>" + item.platform + 
+						"</td><td>" + item.model + 
+						"</td><td>" + item.project_id + 
+						"</td><td>" + item.user + 
+						"</td><td>" + item.delivery_type + 
+						"</td><td>" + item.tracking_number + 
+						"</td><td>" + item.date + 
+						"</td><td>" + item.description + 
+						"</td><td style='text-align: center;width:10%'>" +
+						"<a href='hardware_loan_update.html?"+item.guid+"' class='btn btn-primary'>更新</a>" + 
+						"</td></tr>"
+					);
 				});
 				$("#table").DataTable();
 				TableExport.init("硬件借出列表");

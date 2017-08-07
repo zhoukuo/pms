@@ -42,7 +42,7 @@
 			<!-- Content Wrapper. Contains page content -->
 			<div id="pagebody" class="content-wrapper">
 				<div id="SuccessMessage" class="alert alert-success alert-dismissible" style="display: none;">
-					<i class="icon fa fa-check"></i><span id="SuccussText">软件出库成功！</span>
+					<i class="icon fa fa-check"></i><span id="SuccussText">软件出库信息更新成功，返回列表页面！</span>
 				</div>
 				<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
 					<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
@@ -138,6 +138,7 @@
 
 		<!-- jQuery 2.2.3 -->
 		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../../plugins/jquery-cookie-master/src/jquery.cookie.js"></script>
 		<!-- Bootstrap 3.3.6 -->
 		<script src="../../bootstrap/js/bootstrap.min.js"></script>
 		<!-- AdminLTE App -->
@@ -323,16 +324,9 @@
 							return;
 						}
 						//成功
-						$("#SuccessMessage").slideDown("500").delay("2000").slideUp("500");
-						//返回上一页
 						$("#SuccessMessage").slideDown("500").delay("1000").slideUp("500");
-						setTimeout(function(){window.location.href="software_delivery_list.html";},1000);
-						// clean up
-						// $("#id option").remove();
-						// $("#id").append("<option>请选择设备序列号...</option>");
-						//InitIdList(); //成功之后，重新获取设备id
-						//$("#id").val("").focus();
-
+						//返回上一页
+						setTimeout("window.location.href=document.referrer",2000)
 					},
 					error: function(XmlHttpRequest, textStatus, errorThrown) {
 						//调用失败

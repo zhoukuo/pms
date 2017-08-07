@@ -41,6 +41,190 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "用户管理",
+					"description": "",
+					"item": [
+						{
+							"name": "{{url}}/users/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"raoyun@bjca.org.cn\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/users/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"raoyun@bjca.org.cn\",\n\t\"password\": \"111111\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/users/",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"raoyun@bjca.org.cn\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/users/",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/verifyusers/ ok",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"raoyun@bjca.org.cn\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/verifyusers/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"raoyun@bjca.org.cn\",\n\t\"password\": \"111111\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/verifyusers/ passwd is null",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"用户名和密码不能为空！\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/verifyusers/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"raoyun@bjca.org.cn\",\n\t\"password\": \"\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/verifyusers/ name is wrong",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"[]\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/verifyusers/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"zhangsan@bjca.org.cn\",\n\t\"password\": \"111111\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "{{url}}/verifyusers/ password is wrong",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Body matches string\"] = responseBody.has(\"[]\");"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/verifyusers/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"raoyun@bjca.org.cn\",\n\t\"password\": \"222222\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "项目信息",
 					"description": "",
 					"item": [

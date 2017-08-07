@@ -1,153 +1,155 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 
-<head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
-	<title>PMS-BJCA</title>
-	<!-- Tell the browser to be responsive to screen width -->
-	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<!-- Bootstrap 3.3.6 -->
-	<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
-	<!-- Ionicons -->
-	<link rel="stylesheet" href="../../ionicons/css/ionicons.min.css">
-	<!-- DataTables -->
-	<link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
-	<!-- Theme style -->
-	<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
-	<!-- AdminLTE Skins. Choose a skin from the css/skins
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
+		<title>PMS-BJCA</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../../ionicons/css/ionicons.min.css">
+		<!-- DataTables -->
+		<link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-	<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-</head>
+		<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+	</head>
 
-<body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
-		<!-- Main Header -->
-		<header id="header" class="main-header">
-			<!-- Logo -->
-			<a href="#" class="logo">
-				<!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>PMS</b></span>
-				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg">PMS-BJCA</span>
-			</a>
-			<!-- nav 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
-			<nav id="nav" class="navbar navbar-static-top" role="navigation">&nbsp;</nav>
-		</header>
-		<!-- Left side column.不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
-		<aside id="aside" class="main-sidebar">&nbsp;</aside>
+	<body class="hold-transition skin-blue sidebar-mini">
+		<div class="wrapper">
+			<!-- Main Header -->
+			<header id="header" class="main-header">
+				<!-- Logo -->
+				<a href="#" class="logo">
+					<!-- mini logo for sidebar mini 50x50 pixels -->
+					<span class="logo-mini"><b>PMS</b></span>
+					<!-- logo for regular state and mobile devices -->
+					<span class="logo-lg">PMS-BJCA</span>
+				</a>
+				<!-- nav 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+				<nav id="nav" class="navbar navbar-static-top" role="navigation">&nbsp;</nav>
+			</header>
+			<!-- Left side column.不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<aside id="aside" class="main-sidebar">&nbsp;</aside>
 
-		<!-- Content Wrapper. Contains page content -->
-		<div id="pagebody" class="content-wrapper">
-			<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
-				<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
-			</div>
-			<!-- 以下为需要改动的内容  -->
-			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<h1>项目列表<small>Project Info List</small><a type="button" class="btn btn-primary pull-right export-excel" ><i class="fa fa-download"></i></a></h1>
-			</section>
-			<!-- Main content -->
-			<section class="content">
-				<div class="row">
-					<div class="box box-primary">
-						<!-- /.box-header -->
-						<div class="box-body">
-							<table name="test" class="table table-striped table-bordered table-hover table-condensed " id="table">
-								<thead>
-									<tr>
-										<th>项目编号</th>
-										<th>项目名称</th>
-										<th>项目经理</th>
-										<th>所在部门</th>
-										<th>客户名称</th>
-										<th>备注信息</th>
-										<th>操作</th>
-									</tr>
-								</thead>
-								<tbody>
-							
-								</tbody>
-							</table>
-						</div>
-						<!-- /.box-body -->
-					</div>
-					<div class="col-xs-12">
-					</div>
-					<!-- /.box -->
+			<!-- Content Wrapper. Contains page content -->
+			<div id="pagebody" class="content-wrapper">
+				<div id="ErrorMessage" class="alert alert-danger alert-dismissible" style="display: none;">
+					<i class="icon fa fa-ban"></i><span id="ErrorText"></span>
 				</div>
-				<!-- /.row -->
-			</section>
-			<!-- /.content -->
+				<!-- 以下为需要改动的内容  -->
+				<!-- Content Header (Page header) -->
+				<section class="content-header">
+					<h1>项目列表<small>Project Info List</small><a type="button" class="btn btn-primary pull-right export-excel" ><i class="fa fa-download"></i></a></h1>
+				</section>
+				<!-- Main content -->
+				<section class="content">
+					<div class="row">
+						<div class="box box-primary">
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table name="test" class="table table-striped table-bordered table-hover table-condensed " id="table">
+									<thead>
+										<tr>
+											<th>项目编号</th>
+											<th>项目名称</th>
+											<th>项目经理</th>
+											<th>所在部门</th>
+											<th>客户名称</th>
+											<th>备注信息</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
 
-		</div>
-		<!-- /.content-wrapper -->
-		
-		<!-- Main Footer 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
-		<footer id="footer" class="main-footer">&nbsp;</footer>
-		<!-- /.control-sidebar -->
-		<!-- Add the sidebar's background. This div must be placed
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<div class="col-xs-12">
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- /.row -->
+				</section>
+				<!-- /.content -->
+
+			</div>
+			<!-- /.content-wrapper -->
+
+			<!-- Main Footer 不要删除标签内的&nbsp; 否则会引起页面布局混乱  -->
+			<footer id="footer" class="main-footer">&nbsp;</footer>
+			<!-- /.control-sidebar -->
+			<!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-		<div class="control-sidebar-bg"></div>
-	</div>
-	<!-- ./wrapper -->
+			<div class="control-sidebar-bg"></div>
+		</div>
+		<!-- ./wrapper -->
 
-	<!-- REQUIRED JS SCRIPTS -->
+		<!-- REQUIRED JS SCRIPTS -->
 
-	<!-- jQuery 2.2.3 -->
-	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<!-- Bootstrap 3.3.6 -->
-	<script src="../../bootstrap/js/bootstrap.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="../../dist/js/app.min.js"></script>
-	<!-- DataTables -->
-	<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<script src="../../plugins/export-excel/table.js"></script>
-	<script type="text/javascript" src="../../plugins/export-excel/tableExport.min.js"></script>
-	<script src="../../plugins/export-excel/table-export.js"></script>
-	<!-- setting -->
-	<script src="../../config.js"></script>
-	<script>
-		jQuery(document).ready(function() {
-			$.ajax({//取列表
-			  url: "http://" + hostname + "/projects/",
-			  type: 'GET',
-			  dataType: "json",
-			  data: "",
-			  success:function(response) {
-			  	if(response.Status != 200) {//失败
+		<!-- jQuery 2.2.3 -->
+		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="../../plugins/jquery-cookie-master/src/jquery.cookie.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../../bootstrap/js/bootstrap.min.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../../dist/js/app.min.js"></script>
+		<!-- DataTables -->
+		<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+		<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
+		<script src="../../plugins/export-excel/table.js"></script>
+		<script type="text/javascript" src="../../plugins/export-excel/tableExport.min.js"></script>
+		<script src="../../plugins/export-excel/table-export.js"></script>
+		<!-- setting -->
+		<script src="../../config.js"></script>
+		<script>
+			jQuery(document).ready(function() {
+				$.ajax({ //取列表
+					url: "http://" + hostname + "/projects/",
+					type: 'GET',
+					dataType: "json",
+					data: "",
+					success: function(response) {
+						if(response.Status != 200) { //失败
 							$("#ErrorText").text(response.StatusText + "(" + response.Status + ")");
 							$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
 							return;
 						}
-				//调用成功
-				$.each(JSON.parse(response.ResponseText), function(index, item) {
-					$("#table tbody").append(
-						"<tr><td>"+item.id+
-						"</td><td>"+item.name+
-						"</td><td>"+item.manager+
-						"</td><td>"+item.dept+
-						"</td><td>"+item.customer+
-						"</td><td>"+item.description+
-						"</td><td style='padding:0px;text-align: center;'><div class='btn-group'>"+
-						"<a href='project_info_update.html?"+item.guid+"' class='btn btn-primary glyphicon glyphicon-edit'></a>"+
-						"</div></td></tr>"
-					);
-				});
+						//调用成功
+						$.each(JSON.parse(response.ResponseText), function(index, item) {
+							$("#table tbody").append(
+								"<tr><td>" + item.id +
+								"</td><td>" + item.name +
+								"</td><td>" + item.manager +
+								"</td><td>" + item.dept +
+								"</td><td>" + item.customer +
+								"</td><td>" + item.description +
+								"</td><td style='text-align: center;width:10%'>" + 
+								"<a href='project_info_update.html?" + item.guid + "' class='btn btn-primary'>更新</a>" +
+								"</td></tr>"
+							);
+						});
 
-				$("#table").DataTable();
-				TableExport.init("项目列表");
-			  },
-			  error: function(XmlHttpRequest, textStatus, errorThrown){
-				//调用失败
-				$("#ErrorText").text("获取项目列表失败，请联系管理员！");
-				$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
-			  }
+						$("#table").DataTable();
+						TableExport.init("项目列表");
+					},
+					error: function(XmlHttpRequest, textStatus, errorThrown) {
+						//调用失败
+						$("#ErrorText").text("获取项目列表失败，请联系管理员！");
+						$("#ErrorMessage").slideDown("500").delay("2000").slideUp("500");
+					}
+				});
 			});
-		});
-	</script>
-	
-</body>
+		</script>
+
+	</body>
 
 </html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:8000/" />
+<title>hardware_delivery_reject</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">hardware_delivery_reject</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/pages/main/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=win_ser_local</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='aside']/section/ul/li[3]/a/span</td>
+	<td>19,14</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=硬件产品出库列表</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@id='table']/tbody/tr[3]/td[14]/div/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>id=order_id</td>
+	<td>125,17</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=order_id</td>
+	<td>BJCA201703067</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>id=date</td>
+	<td>114,19</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//tr[5]/td[2]</td>
+	<td>20,11</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>id=delivery_type</td>
+	<td>378,28</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=delivery_type</td>
+	<td>label=快递</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//select[@id='delivery_type']/option[2]</td>
+	<td>262,12</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>id=tracking_number</td>
+	<td>129,18</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tracking_number</td>
+	<td>1064781227278</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>id=description</td>
+	<td>169,27</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>selenium 测试数据-退货</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>url=http://192.168.126.166:8000/pages/delivery/hardware_delivery_list.html</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
